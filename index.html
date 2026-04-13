@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda Adultos — Catálogo</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #1a1a1a;
+      --surface2: #232323;
+      --accent: #e0006e;
+      --accent2: #ff4da6;
+      --text: #f0f0f0;
+      --muted: #888;
+      --border: #2e2e2e;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #1a001a 0%, #0d0d0d 60%, #1a0010 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+    .logo-text span { color: var(--accent2); }
+
+    .search-wrap {
+      flex: 1; max-width: 420px;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 9px 16px 9px 42px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-wrap input:focus { border-color: var(--accent); }
+    .search-wrap svg {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .cart-btn {
+      background: var(--accent);
+      border: none; border-radius: 30px;
+      color: #fff; font-size: 0.85rem; font-weight: 600;
+      padding: 9px 18px; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: background .2s;
+    }
+    .cart-btn:hover { background: var(--accent2); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a001a 0%, #0d0d0d 100%);
+      padding: 48px 24px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+    /* BADGES */
+    .badges {
+      display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
+    }
+    .badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.8rem; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .badge span { color: var(--accent2); font-weight: 700; }
+
+    /* CATEGORIES */
+    .categories-section {
+      padding: 28px 24px 0;
+      max-width: 1400px; margin: 0 auto;
+    }
+    .section-title {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: .1em;
+      color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .categories-scroll {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .cat-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--muted);
+      font-size: 0.82rem; font-weight: 500;
+      padding: 8px 18px; cursor: pointer;
+      transition: all .2s; white-space: nowrap;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* GRID */
+    .products-section {
+      padding: 24px;
+      max-width: 1400px; margin: 0 auto;
+    }
+    .grid-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px;
+    }
+    .results-count { font-size: 0.85rem; color: var(--muted); }
+    .sort-select {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); border-radius: 8px; padding: 6px 12px;
+      font-size: 0.85rem; cursor: pointer; outline: none;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 30px rgba(224,0,110,.15);
+    }
+    .card-img {
+      width: 100%; aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--surface2);
+      display: block;
+      transition: opacity .2s;
+    }
+    .card-img:hover { opacity: .9; }
+    .card-body { padding: 12px; }
+    .card-category {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: 4px;
+    }
+    .card-name { font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card-price { font-size: 1rem; font-weight: 800; color: var(--accent2); }
+    .card-add {
+      background: var(--accent);
+      border: none; border-radius: 8px;
+      color: #fff; font-size: 0.75rem; font-weight: 600;
+      padding: 5px 12px; cursor: pointer;
+      transition: background .2s;
+    }
+    .card-add:hover { background: var(--accent2); }
+
+    /* TAGS */
+    .tag-new {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--accent); color: #fff;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 20px; letter-spacing: .05em;
+    }
+    .tag-hot {
+      position: absolute; top: 10px; left: 10px;
+      background: #ff6600; color: #fff;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 20px;
+    }
+    .card-img-wrap { position: relative; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 92%; max-width: 900px;
+      max-height: 92vh;
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); border-radius: 50%;
+      width: 32px; height: 32px; cursor: pointer;
+      font-size: 18px; display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+    }
+    .modal-close:hover { background: var(--accent); border-color: var(--accent); }
+    .modal-body {
+      display: flex; gap: 0; flex-wrap: wrap;
+    }
+    .modal-gallery {
+      flex: 1; min-width: 280px;
+      padding: 20px;
+    }
+    .modal-main-img {
+      width: 100%; aspect-ratio: 1;
+      object-fit: cover; border-radius: 10px;
+      background: var(--surface2); margin-bottom: 10px;
+    }
+    .modal-thumbs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .modal-thumb {
+      width: 60px; height: 60px;
+      object-fit: cover; border-radius: 6px;
+      border: 2px solid transparent; cursor: pointer;
+      transition: border-color .15s;
+    }
+    .modal-thumb.active, .modal-thumb:hover { border-color: var(--accent); }
+    .modal-info {
+      flex: 1; min-width: 260px;
+      padding: 24px 20px 24px 4px;
+    }
+    .modal-cat { font-size: 0.75rem; font-weight: 700; color: var(--accent2); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+    .modal-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; }
+    .modal-price { font-size: 1.8rem; font-weight: 900; color: var(--accent2); margin-bottom: 20px; }
+    .modal-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+    .modal-features { margin-bottom: 24px; }
+    .modal-features li {
+      list-style: none; padding: 5px 0;
+      font-size: 0.85rem; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .modal-features li::before { content: '✓'; color: var(--accent2); font-weight: 700; }
+    .modal-add-btn {
+      width: 100%; background: var(--accent); border: none;
+      color: #fff; font-size: 1rem; font-weight: 700;
+      padding: 14px; border-radius: 10px; cursor: pointer;
+      transition: background .2s; margin-bottom: 10px;
+    }
+    .modal-add-btn:hover { background: var(--accent2); }
+    .modal-wish-btn {
+      width: 100%; background: transparent;
+      border: 1px solid var(--border); color: var(--muted);
+      font-size: 0.9rem; padding: 10px; border-radius: 10px; cursor: pointer;
+      transition: all .2s;
+    }
+    .modal-wish-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* EMPTY */
+    .empty { text-align: center; padding: 80px 24px; color: var(--muted); }
+    .empty svg { margin-bottom: 16px; opacity: .3; }
+    .empty p { font-size: 1rem; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer strong { color: var(--accent2); }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 300;
+      background: var(--accent); color: #fff;
+      padding: 12px 20px; border-radius: 10px;
+      font-size: 0.9rem; font-weight: 600;
+      opacity: 0; pointer-events: none;
+      transform: translateY(10px);
+      transition: all .3s;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      header { padding: 0 12px; height: 56px; }
+      .cart-btn span { display: none; }
+      .modal-info { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">🔥</div>
+    <span class="logo-text">Tienda <span>Adultos</span></span>
+  </a>
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Buscar productos…" autocomplete="off" />
+  </div>
+  <button class="cart-btn" onclick="showToast('🛒 Carrito disponible próximamente')">
+    🛒 <span>Carrito</span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Catálogo de Productos</h1>
+  <p>La mejor selección de productos para adultos. Envíos 100% discretos a todo el país.</p>
+  <div class="badges">
+    <div class="badge">📦 <span>Envíos</span> discretos</div>
+    <div class="badge">🔒 <span>Compra</span> segura</div>
+    <div class="badge">⚡ <span>+100</span> productos</div>
+    <div class="badge">💳 <span>Todos</span> los medios de pago</div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<div class="categories-section">
+  <p class="section-title">Categorías</p>
+  <div class="categories-scroll" id="catFilters"></div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="grid-header">
+    <span class="results-count" id="resultsCount"></span>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Ordenar por: Relevancia</option>
+      <option value="name-asc">Nombre A–Z</option>
+      <option value="name-desc">Nombre Z–A</option>
+    </select>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+  <div class="empty" id="emptyState" style="display:none">
+    <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <p>No se encontraron productos para tu búsqueda.</p>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <img class="modal-main-img" id="modalMainImg" src="" alt="" />
+        <div class="modal-thumbs" id="modalThumbs"></div>
+      </div>
+      <div class="modal-info">
+        <div class="modal-cat" id="modalCat"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-price" id="modalPrice"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <ul class="modal-features" id="modalFeatures"></ul>
+        <button class="modal-add-btn" onclick="showToast('✅ Producto agregado al carrito')">Agregar al carrito</button>
+        <button class="modal-wish-btn" onclick="showToast('❤️ Guardado en favoritos')">♡ Guardar en favoritos</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 <strong>Tienda Adultos</strong> — Todos los derechos reservados</p>
+  <p style="margin-top:6px">Envíos discretos · Compras seguras · Atención personalizada</p>
+</footer>
+
+<script>
+// ─── PRODUCT DATA ───────────────────────────────────────────────────────────
+const products = [
+  // ANAL
+  {
+    id: 1, name: "Consolador Anal Inflable Silicona 9cm",
+    category: "Anal", tag: "new",
+    images: [
+      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-05b881415e77470b9a1979f707431342.jpg",
+      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-685592b74e9d4b65af200da0e86a73a4.jpg",
+      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-9c24b62515df495d936a1fdec59f8fd1.jpg",
+      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-e4ea35a91dab4ccfa78dd24d1f35f461.jpg",
+    ],
+    desc: "Consolador anal inflable fabricado en silicona premium. Diseño ergonómico para mayor comodidad. Sistema de inflado incluido.",
+    features: ["Material: Silicona suave", "Tamaño: 9cm x 3cm", "Sistema inflable", "Fácil limpieza"],
+    price: "$ 4.500"
+  },
+  {
+    id: 2, name: "Booty Call Set — Negro",
+    category: "Anal", tag: "",
+    images: [
+      "ANAL/ee73-774-0118-booty-call-set-of-black-002740d965f34dc8b3d0cdc2e9062821.jpg",
+      "ANAL/ee73-774-0118-booty-call-set-of-black-71c0f8bcdeef4b699e2b02041bc71aad.jpg",
+    ],
+    desc: "Set completo para estimulación anal. Incluye múltiples accesorios de diferentes tamaños para principiantes y avanzados.",
+    features: ["Set de 3 piezas", "Material no poroso", "Tamaños progresivos", "Base de seguridad"],
+    price: "$ 6.200"
+  },
+  {
+    id: 3, name: "Nicole — Vibrador Anal Multifuncional USB",
+    category: "Anal", tag: "hot",
+    images: [
+      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-0db6432f74bb47c3b430d2f16eac1900.jpg",
+      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-9e4e929ea53e4472be1d0e082313997d.jpg",
+      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-d0b97647c6fb4e95934aa670255de57a.jpg",
+      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-f70ae551208644be90995799fe60a5f4.jpg",
+    ],
+    desc: "Vibrador anal multifuncional recargable vía USB. Potente motor silencioso con múltiples velocidades y patrones de vibración.",
+    features: ["Recargable USB", "10 modos de vibración", "Silicona médica", "Impermeable IPX7"],
+    price: "$ 8.900"
+  },
+
+  // ARNES
+  {
+    id: 4, name: "Arnés Prótesis Vibrador 17cm x 5.5cm",
+    category: "Arnés", tag: "new",
+    images: [
+      "ARNES/bw-010025-arnes-protesis-vibrador-17cm-x-55cm-25c93258fe4e48e98df2249219004bf4.jpg",
+      "ARNES/bw-010025-arnes-protesis-vibrador-17cm-x-55cm-5c5cd1d1ef5c4ccb9c44f1044a3c2dad.jpg",
+      "ARNES/bw-010025-arnes-protesis-vibrador-17cm-x-55cm-80d1fb0e4e984c6dbdb5960bfe97b793.jpg",
+    ],
+    desc: "Arnés ajustable con prótesis vibrador de 17cm. Cintas regulables para mayor comodidad. Motor vibrador integrado.",
+    features: ["17cm x 5.5cm", "Arnés ajustable", "Vibrador integrado", "Material suave"],
+    price: "$ 12.500"
+  },
+  {
+    id: 5, name: "Arnés BW-010026 — Set Completo",
+    category: "Arnés", tag: "",
+    images: [
+      "ARNES/BW-010026 (1).jpg",
+      "ARNES/BW-010026 (2).jpg",
+      "ARNES/BW-010026 (3).jpg",
+      "ARNES/BW-010026 (4).jpg",
+    ],
+    desc: "Set completo de arnés con accesorios. Correas ajustables y material resistente para mayor durabilidad.",
+    features: ["Set completo", "Correas ajustables", "Material premium", "Fácil de poner"],
+    price: "$ 10.800"
+  },
+
+  // GELES
+  {
+    id: 6, name: "Serum Concentrado EOS Tightening 25ml",
+    category: "Geles", tag: "new",
+    images: [
+      "sic02-serum-concentrado-eos-tightening-pleasure-25ml-2951a40139ee4e4a9739a6835dfa8e56.jpg",
+      "sic02-serum-concentrado-eos-tightening-pleasure-25ml-2cfde4899f544ebaad36738a9b1e6797.jpg",
+      "sic02-serum-concentrado-eos-tightening-pleasure-25ml-8cf1c799cc634685a32f9da9dfd1ce0f.jpg",
+    ],
+    desc: "Serum concentrado para mayor placer e intensidad. Fórmula especial de 25ml. Acción tightening para mayor sensibilidad.",
+    features: ["25ml", "Fórmula concentrada", "Efecto intensificador", "Uso íntimo"],
+    price: "$ 2.800"
+  },
+  {
+    id: 7, name: "Gel Lubricante Premium",
+    category: "Geles", tag: "",
+    images: [
+      "GELES/D_NQ_NP_2X_810875-MLA43532828271_092020-F.png",
+      "GELES/D_NQ_NP_808403-MLA40180445634_122019-O.png",
+    ],
+    desc: "Lubricante premium de base acuosa. Compatible con todos los materiales. Fórmula hipoalergénica y de larga duración.",
+    features: ["Base acuosa", "Hipoalergénico", "Larga duración", "Compatible con látex"],
+    price: "$ 1.900"
+  },
+  {
+    id: 8, name: "Pack Lubricantes Variados",
+    category: "Geles", tag: "hot",
+    images: [
+      "bodegon-succionadores-min.jpg",
+      "GELES/D_NQ_NP_611702-MLA48322520105_112021-O.webp",
+      "GELES/D_NQ_NP_621380-MLA48322586497_112021-O.webp",
+    ],
+    desc: "Pack con variedad de lubricantes para diferentes experiencias. Incluye lubricantes de efecto calor, frío e intensificador.",
+    features: ["Pack x3 unidades", "Efecto calor y frío", "Sin parabenos", "Aroma neutro"],
+    price: "$ 4.200"
+  },
+
+  // ANILLOS
+  {
+    id: 9, name: "Anillo Vibrador Osmond Silicona",
+    category: "Anillos", tag: "hot",
+    images: [
+      "bi-210169-anillo-vibrador-osmond-silicona-4f653ae7946e45509769361b8f6a45ff.jpg",
+      "bi-210169-anillo-vibrador-osmond-silicona-61329fdecfb34554a78b565b9c90b633.jpg",
+      "bi-210169-anillo-vibrador-osmond-silicona-7ab033e375d24e95b0b8d30c0234134c.jpg",
+      "bi-210169-anillo-vibrador-osmond-silicona-8aea67fe25b64d14a752893c8a32a8c8.jpg",
+    ],
+    desc: "Anillo vibrador en silicona suave. Motor silencioso de alta potencia. Diseño ergonómico para estimulación mutua.",
+    features: ["Silicona médica", "10 velocidades", "Motor silencioso", "Resistente al agua"],
+    price: "$ 3.600"
+  },
+  {
+    id: 10, name: "Anillo Vibrador Cobra Silicona",
+    category: "Anillos", tag: "",
+    images: [
+      "anillos retardantes/bi-210147-anillo-vibrador-cobra-silicona-0602fd5405734632ab28d592f8fa80e2.jpg",
+      "anillos retardantes/bi-210147-anillo-vibrador-cobra-silicona-29231aeb0c3a44d493465801dc9d5f42.jpg",
+      "anillos retardantes/bi-210147-anillo-vibrador-cobra-silicona-43f5f946e62542de9ad3bf905bdbc6fb.jpg",
+    ],
+    desc: "Anillo vibrador con diseño cobra en silicona premium. Retarda la eyaculación y amplifica el placer para ambos.",
+    features: ["Diseño cobra", "Efecto retardante", "Silicona flexible", "Batería incluida"],
+    price: "$ 3.200"
+  },
+  {
+    id: 11, name: "Anillos para Pene — Pack x5",
+    category: "Anillos", tag: "new",
+    images: [
+      "anillos/1615261543138695.jpg",
+      "anillos/1615261543317937.jpg",
+      "anillos/1615261543517525.jpg",
+      "anillos/1618627780753273.jpg",
+    ],
+    desc: "Set de 5 anillos en diferentes tamaños y grosores. Material elástico de alta calidad. Ideales para principiantes.",
+    features: ["Pack x5", "Tallas variadas", "Elástico premium", "Fácil de usar"],
+    price: "$ 1.800"
+  },
+
+  // SUCCIONADOR
+  {
+    id: 12, name: "Succionador de Clítoris N°2",
+    category: "Succionador", tag: "hot",
+    images: [
+      "succionador de clitoris/j2018-u7-number-two-5f3cf1f4288f4d89921897ab15032728.jpg",
+      "succionador de clitoris/j2018-u7-number-two-6bf6ce067577492fac0a3d385e103e39.jpg",
+      "succionador de clitoris/j2018-u7-number-two-ab6a1820c0994c8cab696d79866ac3a3.jpg",
+      "succionador de clitoris/j2018-u7-number-two-b9cacbfd490342e19f5e85ad4708e48a.jpg",
+    ],
+    desc: "Succionador de clítoris con tecnología de ondas de presión. Sin contacto directo para una estimulación única e intensa.",
+    features: ["10 modos de succión", "Ondas de presión", "Silencioso", "Recargable USB"],
+    price: "$ 9.500"
+  },
+  {
+    id: 13, name: "Succionadores — Set Premium",
+    category: "Succionador", tag: "",
+    images: [
+      "succionadores.jpeg",
+    ],
+    desc: "Set premium de succionadores de diferentes intensidades. Perfectos para estimulación de pezones y zonas erógenas.",
+    features: ["Set variado", "Múltiples tamaños", "Ventosa de silicona", "Fácil uso"],
+    price: "$ 2.400"
+  },
+
+  // TORSO
+  {
+    id: 14, name: "Cola Ano Vagina Cyberskin FT-1B006",
+    category: "Torso", tag: "new",
+    images: [
+      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-19d3a522635c4c0a90233ebf9dbf9cc3.jpg",
+      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-4e786c7ef24b4312a42f2827bf982b8a.jpg",
+      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-79656a64769641fd91e79618efa02a8b.jpg",
+      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-8f5905ff37744ce588236c66ff5bbfc0.jpg",
+    ],
+    desc: "Torso realístico en material cyberskin ultrasuave. Textura que imita la piel real. Doble entrada para mayor versatilidad.",
+    features: ["Material Cyberskin", "Doble entrada", "Ultra realístico", "Fácil limpieza"],
+    price: "$ 18.500"
+  },
+
+  // MASAJEADOR
+  {
+    id: 15, name: "Vibrador Masajeador Multifunción USB",
+    category: "Masajeador", tag: "hot",
+    images: [
+      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-01d6c40d9d544466bfcc04290eb5c853.jpg",
+      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-098bed35c2f74df78ff981e3decfa216.jpg",
+      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-0fd31d3cc476478ca1457196d6b17fb9.jpg",
+      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-18697f702caa4e60af6f41d2a190c982.jpg",
+    ],
+    desc: "Masajeador multifunción recargable vía USB. Cabezal flexible para llegar a zonas difíciles. Silicona médica hipoalergénica.",
+    features: ["Recargable USB", "Cabezal flexible", "12 funciones", "Silicona médica"],
+    price: "$ 11.200"
+  },
+
+  // VAGINA
+  {
+    id: 16, name: "Vagina Realística Premium",
+    category: "Vagina", tag: "",
+    images: [
+      "vagina/D_NQ_NP_609003-MLA40428991207_012020-W.jpg",
+      "vagina/D_NQ_NP_990595-MLA40428987216_012020-O.jpg",
+    ],
+    desc: "Vagina realística en material ultrasuave. Interior texturizado para mayor estimulación. Diseño compacto y discreto.",
+    features: ["Material ultrasuave", "Interior texturizado", "Compacta", "Fácil limpieza"],
+    price: "$ 7.800"
+  },
+
+  // EXTENSORES
+  {
+    id: 17, name: "Extensor de Pene — Kit Completo",
+    category: "Extensores", tag: "new",
+    images: [
+      "extensor.png",
+      "EXTENSORES/Imagenes_CW110538/CW110538 (1).jpg",
+    ],
+    desc: "Kit extensor premium con múltiples fundas de diferente longitud y grosor. Material silicona flexible y realístico.",
+    features: ["Kit 3 piezas", "Silicona realística", "Tallas variadas", "Base segura"],
+    price: "$ 8.400"
+  },
+
+  // BALA
+  {
+    id: 18, name: "Bala Vibradora Power Bullet",
+    category: "Bala", tag: "hot",
+    images: [
+      "bala.jpeg",
+    ],
+    desc: "Bala vibradora potente y discreta. Perfecta para estimulación puntual. Múltiples velocidades y patrones.",
+    features: ["Ultra potente", "10 velocidades", "Discreta", "Pila AA incluida"],
+    price: "$ 2.200"
+  },
+  {
+    id: 19, name: "Zenbala — Bola de Kegel Silicona",
+    category: "Bala", tag: "new",
+    images: [
+      "Zenbala-1-unid-suave-reemplazo-de-silicona-para-bomba-de-vac-o-del-pene-cilindro-Camilla.jpg",
+    ],
+    desc: "Bola de kegel en silicona suave para fortalecer el suelo pélvico. Peso calibrado para ejercicios progresivos.",
+    features: ["Silicona médica", "Peso calibrado", "Cordón de recuperación", "Para ejercicio pélvico"],
+    price: "$ 3.100"
+  },
+
+  // PEZONERAS
+  {
+    id: 20, name: "Pezoneras con Vibración",
+    category: "Pezoneras", tag: "",
+    images: [
+      "PEZONERAS/foto.JPG",
+      "PEZONERAS/WhatsApp Image 2020-07-30 at 3.31.58 PM.jpeg",
+    ],
+    desc: "Pezoneras con micro vibrador integrado. Succión ajustable y vibración para máxima estimulación.",
+    features: ["Vibración integrada", "Succión ajustable", "Silicona suave", "Par incluido"],
+    price: "$ 2.900"
+  },
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let activeCategory = "Todos";
+let searchQuery = "";
+let currentProduct = null;
+
+// ─── CATEGORIES ──────────────────────────────────────────────────────────────
+const allCats = ["Todos", ...new Set(products.map(p => p.category))];
+
+function renderCats() {
+  const wrap = document.getElementById("catFilters");
+  wrap.innerHTML = allCats.map(c => `
+    <button class="cat-btn ${c === activeCategory ? 'active' : ''}" onclick="setCategory('${c}')">${c}</button>
+  `).join("");
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  renderCats();
+  renderGrid();
+}
+
+// ─── GRID ─────────────────────────────────────────────────────────────────────
+function getFiltered() {
+  let list = products.filter(p => {
+    const matchCat = activeCategory === "Todos" || p.category === activeCategory;
+    const q = searchQuery.toLowerCase();
+    const matchQ = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  const sort = document.getElementById("sortSelect").value;
+  if (sort === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
+  if (sort === "name-desc") list.sort((a, b) => b.name.localeCompare(a.name));
+
+  return list;
+}
+
+function renderGrid() {
+  const list = getFiltered();
+  const grid = document.getElementById("productsGrid");
+  const empty = document.getElementById("emptyState");
+  const count = document.getElementById("resultsCount");
+
+  count.textContent = `${list.length} producto${list.length !== 1 ? 's' : ''}`;
+
+  if (!list.length) {
+    grid.innerHTML = "";
+    empty.style.display = "block";
+    return;
+  }
+  empty.style.display = "none";
+
+  grid.innerHTML = list.map(p => `
+    <div class="product-card" onclick="openModal(${p.id})">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${p.images[0]}" alt="${p.name}" loading="lazy"
+             onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><rect fill=\'%231a1a1a\' width=\'200\' height=\'200\'/><text fill=\'%23444\' font-size=\'40\' x=\'50%\' y=\'50%\' text-anchor=\'middle\' dy=\'.35em\'>📦</text></svg>'" />
+        ${p.tag === 'new' ? '<span class="tag-new">NUEVO</span>' : ''}
+        ${p.tag === 'hot' ? '<span class="tag-hot">🔥 HOT</span>' : ''}
+      </div>
+      <div class="card-body">
+        <div class="card-category">${p.category}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-footer">
+          <span class="card-price">${p.price}</span>
+          <button class="card-add" onclick="event.stopPropagation(); showToast('✅ Agregado al carrito')">+ Agregar</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p;
+
+  document.getElementById("modalCat").textContent = p.category;
+  document.getElementById("modalTitle").textContent = p.name;
+  document.getElementById("modalPrice").textContent = p.price;
+  document.getElementById("modalDesc").textContent = p.desc;
+  document.getElementById("modalMainImg").src = p.images[0];
+  document.getElementById("modalMainImg").alt = p.name;
+
+  const featEl = document.getElementById("modalFeatures");
+  featEl.innerHTML = p.features.map(f => `<li>${f}</li>`).join("");
+
+  const thumbsEl = document.getElementById("modalThumbs");
+  thumbsEl.innerHTML = p.images.map((img, i) => `
+    <img class="modal-thumb ${i === 0 ? 'active' : ''}"
+         src="${img}" alt="${p.name}" loading="lazy"
+         onclick="setMainImg('${img}', this)"
+         onerror="this.style.display='none'" />
+  `).join("");
+
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function setMainImg(src, thumbEl) {
+  document.getElementById("modalMainImg").src = src;
+  document.querySelectorAll(".modal-thumb").forEach(t => t.classList.remove("active"));
+  thumbEl.classList.add("active");
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById("modalOverlay")) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+}
+
+// ─── EVENTS ──────────────────────────────────────────────────────────────────
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  renderGrid();
+});
+document.getElementById("sortSelect").addEventListener("change", renderGrid);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModalBtn();
+});
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+renderCats();
+renderGrid();
+</script>
+</body>
+</html>
