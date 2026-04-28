@@ -194,12 +194,21 @@ body { font-family: 'Barlow', sans-serif; background: #0a0a0a; color: #fff; over
 }
 .variant-card {
   background: #1a1a1a;
-  padding: 44px 30px 36px;
+  padding: 0 0 36px;
   text-align: center;
   position: relative;
   border: 1px solid transparent;
   transition: border-color 0.2s, transform 0.2s;
 }
+.variant-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin-bottom: 32px;
+}
+.variant-body { padding: 0 30px; }
 .variant-card:hover { border-color: var(--gold); transform: translateY(-4px); }
 .variant-badge {
   position: absolute;
@@ -455,50 +464,56 @@ footer p { font-size: 12px; color: rgba(255,255,255,0.22); letter-spacing: 1px; 
   </div>
   <div class="variants-grid">
     <div class="variant-card">
-      <span class="variant-icon">🔵</span>
-      <div class="variant-name">Kit Starter</div>
-      <div class="variant-desc">Ideal para comenzar tu transformación. Kit básico con todo lo esencial.</div>
-      <ul class="variant-features">
-        <li>Bomba Power Pump Men 2.0</li>
-        <li>Sleeve standard incluido</li>
-        <li>Guía de uso rápido</li>
-        <li>Garantía 30 días</li>
-      </ul>
-      <div class="variant-price">$24.900</div>
-      <div class="variant-old">Antes: $31.000</div>
-      <a class="btn-variant" href="https://mpago.li/2tA4oQC" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
+      <img class="variant-img" src="img/kit-starter.webp" alt="Kit Starter Power Pump Men 2.0">
+      <div class="variant-body">
+        <div class="variant-name">Kit Starter</div>
+        <div class="variant-desc">Ideal para comenzar tu transformación. Kit básico con todo lo esencial.</div>
+        <ul class="variant-features">
+          <li>Bomba Power Pump Men 2.0</li>
+          <li>Sleeve standard incluido</li>
+          <li>Guía de uso rápido</li>
+          <li>Garantía 30 días</li>
+        </ul>
+        <div class="variant-price">$24.900</div>
+        <div class="variant-old">Antes: $31.000</div>
+        <a class="btn-variant" href="https://mpago.li/2tA4oQC" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
+      </div>
     </div>
     <div class="variant-card" style="border-color: var(--gold);">
       <div class="variant-badge gold-badge">★ MÁS VENDIDO</div>
-      <span class="variant-icon">⚫</span>
-      <div class="variant-name">Power 2.0 Original</div>
-      <div class="variant-desc">El kit estrella. La experiencia completa que miles de hombres ya eligieron.</div>
-      <ul class="variant-features">
-        <li>Bomba Power Pump Men 2.0</li>
-        <li>Sleeve LARGE de regalo</li>
-        <li>Guía premium de uso</li>
-        <li>Soporte prioritario</li>
-        <li>Garantía 30 días</li>
-      </ul>
-      <div class="variant-price">$34.900</div>
-      <div class="variant-old">Antes: $45.000</div>
-      <a class="btn-variant active" href="https://mpago.la/131Wowe" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
+      <img class="variant-img" src="img/kit-power2.webp" alt="Power Pump Men 2.0 Original">
+      <div class="variant-body">
+        <div class="variant-name">Power 2.0 Original</div>
+        <div class="variant-desc">El kit estrella. La experiencia completa que miles de hombres ya eligieron.</div>
+        <ul class="variant-features">
+          <li>Bomba Power Pump Men 2.0</li>
+          <li>Sleeve LARGE de regalo</li>
+          <li>Guía premium de uso</li>
+          <li>Soporte prioritario</li>
+          <li>Garantía 30 días</li>
+        </ul>
+        <div class="variant-price">$34.900</div>
+        <div class="variant-old">Antes: $45.000</div>
+        <a class="btn-variant active" href="https://mpago.la/131Wowe" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
+      </div>
     </div>
     <div class="variant-card">
       <div class="variant-badge">STOCK LIMITADO</div>
-      <span class="variant-icon">🔴</span>
-      <div class="variant-name">Elite Bundle</div>
-      <div class="variant-desc">La experiencia máxima. Para quienes no aceptan límites.</div>
-      <ul class="variant-features">
-        <li>Bomba Power Pump Men 2.0</li>
-        <li>3 Sleeves: S / M / L</li>
-        <li>Anillo de erección incluido</li>
-        <li>Lubricante premium</li>
-        <li>Garantía 30 días extendida</li>
-      </ul>
-      <div class="variant-price">$54.900</div>
-      <div class="variant-old">Antes: $72.000</div>
-      <a class="btn-variant" href="https://mpago.la/1MA8KFB" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
+      <img class="variant-img" src="img/kit-elite.webp" alt="Elite Bundle Power Pump Men 2.0">
+      <div class="variant-body">
+        <div class="variant-name">Elite Bundle</div>
+        <div class="variant-desc">La experiencia máxima. Para quienes no aceptan límites.</div>
+        <ul class="variant-features">
+          <li>Bomba Power Pump Men 2.0</li>
+          <li>3 Sleeves: S / M / L</li>
+          <li>Anillo de erección incluido</li>
+          <li>Lubricante premium</li>
+          <li>Garantía 30 días extendida</li>
+        </ul>
+        <div class="variant-price">$54.900</div>
+        <div class="variant-old">Antes: $72.000</div>
+        <a class="btn-variant" href="https://mpago.la/1MA8KFB" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
+      </div>
     </div>
   </div>
 </div>
