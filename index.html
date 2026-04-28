@@ -1,826 +1,628 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Descubrí Tu Placer — Catálogo</title>
-  <style>
-    :root {
-      --bg: #0d0d0d;
-      --surface: #1a1a1a;
-      --surface2: #232323;
-      --accent: #e0006e;
-      --accent2: #ff4da6;
-      --text: #f0f0f0;
-      --muted: #888;
-      --border: #2e2e2e;
-      --radius: 12px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power Pump Men 2.0 — Descubrí tu Placer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Barlow', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
 
-    /* HEADER */
-    header {
-      background: linear-gradient(135deg, #1a001a 0%, #0d0d0d 60%, #1a0010 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      height: 64px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .logo-icon {
-      width: 38px; height: 38px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-    .logo-text { font-size: 1.2rem; font-weight: 700; color: var(--text); }
-    .logo-text span { color: var(--accent2); }
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --dark: #0a0a0a;
+  --dark2: #111111;
+  --dark3: #1a1a1a;
+  --red: #c0392b;
+}
 
-    .search-wrap {
-      flex: 1; max-width: 420px;
-      position: relative;
-    }
-    .search-wrap input {
-      width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 9px 16px 9px 42px;
-      color: var(--text);
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color .2s;
-    }
-    .search-wrap input:focus { border-color: var(--accent); }
-    .search-wrap svg {
-      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-      color: var(--muted);
-    }
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.badge-top {
+  background: var(--gold);
+  color: #0a0a0a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 7px 24px;
+  border-radius: 30px;
+  margin-bottom: 36px;
+  display: inline-block;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(50px, 10vw, 100px);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 14px;
+  letter-spacing: -3px;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  font-size: clamp(14px, 3vw, 20px);
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.hero-desc {
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+  max-width: 560px;
+  line-height: 1.8;
+  margin-bottom: 50px;
+}
+.stars-hero { font-size: 24px; color: var(--gold); margin-bottom: 8px; letter-spacing: 6px; }
+.stars-label { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 50px; }
+.cta-primary {
+  background: var(--gold);
+  color: #0a0a0a;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 20px 54px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.cta-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.scroll-hint {
+  margin-top: 70px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 12px auto 0;
+}
 
-    .cart-btn {
-      background: var(--accent);
-      border: none; border-radius: 30px;
-      color: #fff; font-size: 0.85rem; font-weight: 600;
-      padding: 9px 18px; cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
-      transition: background .2s;
-    }
-    .cart-btn:hover { background: var(--accent2); }
+.stats-bar {
+  background: var(--gold);
+  padding: 24px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: #0a0a0a;
+  display: block;
+}
+.stat-label { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.55); letter-spacing: 2px; text-transform: uppercase; }
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #1a001a 0%, #0d0d0d 100%);
-      padding: 48px 24px 40px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 800;
-      background: linear-gradient(90deg, #fff 30%, var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 12px;
-    }
-    .hero p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+.section-wrapper { padding: 90px 20px; max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.section-title span { color: var(--gold); }
+.section-desc {
+  font-size: 17px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 580px;
+}
+.divider { width: 60px; height: 3px; background: var(--gold); margin: 30px 0; }
 
-    /* BADGES */
-    .badges {
-      display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
-    }
-    .badge {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 0.8rem; color: var(--muted);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .badge span { color: var(--accent2); font-weight: 700; }
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2px;
+  margin-top: 60px;
+  background: #222;
+}
+.benefit-card {
+  background: #111;
+  padding: 44px 32px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.benefit-card:hover { background: #181818; }
+.benefit-icon {
+  width: 60px; height: 60px;
+  background: rgba(201,168,76,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px;
+  font-size: 26px;
+}
+.benefit-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.benefit-card p { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.8; }
 
-    /* CATEGORIES */
-    .categories-section {
-      padding: 28px 24px 0;
-      max-width: 1400px; margin: 0 auto;
-    }
-    .section-title {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: .1em;
-      color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
-    }
-    .categories-scroll {
-      display: flex; gap: 10px; flex-wrap: wrap;
-    }
-    .cat-btn {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      color: var(--muted);
-      font-size: 0.82rem; font-weight: 500;
-      padding: 8px 18px; cursor: pointer;
-      transition: all .2s; white-space: nowrap;
-    }
-    .cat-btn:hover, .cat-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
+.variants-bg { background: #111; padding: 90px 20px; }
+.variants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  margin-top: 60px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.variant-card {
+  background: #1a1a1a;
+  padding: 44px 30px 36px;
+  text-align: center;
+  position: relative;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.variant-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.variant-badge {
+  position: absolute;
+  top: -16px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+.variant-badge.gold-badge { background: var(--gold); color: #0a0a0a; }
+.variant-icon { font-size: 56px; margin-bottom: 26px; display: block; }
+.variant-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.variant-desc { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.8; margin-bottom: 24px; }
+.variant-features { list-style: none; margin-bottom: 28px; text-align: left; }
+.variant-features li {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: center; gap: 8px;
+}
+.variant-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+.variant-price { font-size: 36px; font-weight: 700; color: var(--gold); margin-bottom: 6px; font-family: 'Playfair Display', serif; }
+.variant-old { font-size: 15px; color: rgba(255,255,255,0.28); text-decoration: line-through; margin-bottom: 26px; }
+.btn-variant {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+  font-family: 'Barlow', sans-serif;
+}
+.btn-variant:hover, .btn-variant.active { background: var(--gold); color: #0a0a0a; }
 
-    /* GRID */
-    .products-section {
-      padding: 24px;
-      max-width: 1400px; margin: 0 auto;
-    }
-    .grid-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px;
-    }
-    .results-count { font-size: 0.85rem; color: var(--muted); }
-    .sort-select {
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--text); border-radius: 8px; padding: 6px 12px;
-      font-size: 0.85rem; cursor: pointer; outline: none;
-    }
+.steps {
+  display: flex;
+  margin-top: 60px;
+  flex-wrap: wrap;
+  background: #111;
+}
+.step {
+  flex: 1;
+  min-width: 200px;
+  padding: 46px 30px;
+  border-right: 1px solid #222;
+  text-align: center;
+}
+.step:last-child { border-right: none; }
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 70px;
+  font-weight: 900;
+  color: rgba(201,168,76,0.12);
+  display: block;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.step h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+.step p { font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.8; }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-    }
+.guarantee {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 60px 30px;
+  text-align: center;
+  margin-top: 60px;
+  border-radius: 4px;
+}
+.guarantee-icon { font-size: 56px; margin-bottom: 22px; display: block; }
+.guarantee h3 { font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 16px; }
+.guarantee p { color: rgba(255,255,255,0.48); max-width: 500px; margin: 0 auto; line-height: 1.8; font-size: 16px; }
 
-    .product-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-      box-shadow: 0 8px 30px rgba(224,0,110,.15);
-    }
-    .card-img {
-      width: 100%; aspect-ratio: 1;
-      object-fit: cover;
-      background: var(--surface2);
-      display: block;
-      transition: opacity .2s;
-    }
-    .card-img:hover { opacity: .9; }
-    .card-body { padding: 12px; }
-    .card-category {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--accent2); margin-bottom: 4px;
-    }
-    .card-name { font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; }
-    .card-price { font-size: 1rem; font-weight: 800; color: var(--accent2); }
-    .card-add {
-      background: var(--accent);
-      border: none; border-radius: 8px;
-      color: #fff; font-size: 0.75rem; font-weight: 600;
-      padding: 5px 12px; cursor: pointer;
-      transition: background .2s;
-    }
-    .card-add:hover { background: var(--accent2); }
+.testimonials-bg { background: #070707; padding: 90px 20px; }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2px;
+  margin-top: 60px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonial-card {
+  background: #111;
+  padding: 38px 32px;
+  border-left: 3px solid var(--gold);
+}
+.test-stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; margin-bottom: 18px; }
+.test-text { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.9; font-style: italic; margin-bottom: 24px; }
+.test-author { display: flex; align-items: center; gap: 14px; }
+.test-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #0a0a0a; font-size: 16px;
+  flex-shrink: 0;
+}
+.test-name { font-size: 15px; font-weight: 600; }
+.test-loc { font-size: 12px; color: rgba(255,255,255,0.32); margin-top: 2px; }
 
-    /* TAGS */
-    .tag-new {
-      position: absolute; top: 10px; left: 10px;
-      background: var(--accent); color: #fff;
-      font-size: 0.65rem; font-weight: 700;
-      padding: 3px 8px; border-radius: 20px; letter-spacing: .05em;
-    }
-    .tag-hot {
-      position: absolute; top: 10px; left: 10px;
-      background: #ff6600; color: #fff;
-      font-size: 0.65rem; font-weight: 700;
-      padding: 3px 8px; border-radius: 20px;
-    }
-    .card-img-wrap { position: relative; }
+.cta-final {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0808 50%, #0a0a0a 100%);
+  padding: 110px 20px;
+  text-align: center;
+}
+.cta-final h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 900;
+  margin-bottom: 22px;
+  line-height: 1.1;
+}
+.cta-final h2 span { color: var(--gold); }
+.cta-final p { color: rgba(255,255,255,0.48); font-size: 18px; margin-bottom: 50px; }
+.price-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 900;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 8px;
+}
+.price-note { font-size: 14px; color: rgba(255,255,255,0.32); margin-bottom: 50px; }
+.trust-items {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+.trust-item { font-size: 13px; color: rgba(255,255,255,0.28); letter-spacing: 1px; }
+.trust-item span { color: var(--gold); margin-right: 6px; }
 
-    /* MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,.85);
-      backdrop-filter: blur(4px);
-      align-items: center; justify-content: center;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      width: 92%; max-width: 900px;
-      max-height: 92vh;
-      overflow-y: auto;
-      display: flex; flex-direction: column;
-      position: relative;
-    }
-    .modal-close {
-      position: absolute; top: 14px; right: 14px;
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--text); border-radius: 50%;
-      width: 32px; height: 32px; cursor: pointer;
-      font-size: 18px; display: flex; align-items: center; justify-content: center;
-      z-index: 10;
-    }
-    .modal-close:hover { background: var(--accent); border-color: var(--accent); }
-    .modal-body {
-      display: flex; gap: 0; flex-wrap: wrap;
-    }
-    .modal-gallery {
-      flex: 1; min-width: 280px;
-      padding: 20px;
-    }
-    .modal-main-img {
-      width: 100%; aspect-ratio: 1;
-      object-fit: cover; border-radius: 10px;
-      background: var(--surface2); margin-bottom: 10px;
-    }
-    .modal-thumbs {
-      display: flex; gap: 8px; flex-wrap: wrap;
-    }
-    .modal-thumb {
-      width: 60px; height: 60px;
-      object-fit: cover; border-radius: 6px;
-      border: 2px solid transparent; cursor: pointer;
-      transition: border-color .15s;
-    }
-    .modal-thumb.active, .modal-thumb:hover { border-color: var(--accent); }
-    .modal-info {
-      flex: 1; min-width: 260px;
-      padding: 24px 20px 24px 4px;
-    }
-    .modal-cat { font-size: 0.75rem; font-weight: 700; color: var(--accent2); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
-    .modal-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; }
-    .modal-price { font-size: 1.8rem; font-weight: 900; color: var(--accent2); margin-bottom: 20px; }
-    .modal-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
-    .modal-features { margin-bottom: 24px; }
-    .modal-features li {
-      list-style: none; padding: 5px 0;
-      font-size: 0.85rem; color: var(--muted);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .modal-features li::before { content: '✓'; color: var(--accent2); font-weight: 700; }
-    .modal-add-btn {
-      width: 100%; background: var(--accent); border: none;
-      color: #fff; font-size: 1rem; font-weight: 700;
-      padding: 14px; border-radius: 10px; cursor: pointer;
-      transition: background .2s; margin-bottom: 10px;
-    }
-    .modal-add-btn:hover { background: var(--accent2); }
-    .modal-wish-btn {
-      width: 100%; background: transparent;
-      border: 1px solid var(--border); color: var(--muted);
-      font-size: 0.9rem; padding: 10px; border-radius: 10px; cursor: pointer;
-      transition: all .2s;
-    }
-    .modal-wish-btn:hover { border-color: var(--accent); color: var(--accent2); }
-
-    /* EMPTY */
-    .empty { text-align: center; padding: 80px 24px; color: var(--muted); }
-    .empty svg { margin-bottom: 16px; opacity: .3; }
-    .empty p { font-size: 1rem; }
-
-    /* FOOTER */
-    footer {
-      margin-top: 60px;
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-    footer strong { color: var(--accent2); }
-
-    /* TOAST */
-    .toast {
-      position: fixed; bottom: 24px; right: 24px; z-index: 300;
-      background: var(--accent); color: #fff;
-      padding: 12px 20px; border-radius: 10px;
-      font-size: 0.9rem; font-weight: 600;
-      opacity: 0; pointer-events: none;
-      transform: translateY(10px);
-      transition: all .3s;
-    }
-    .toast.show { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 600px) {
-      header { padding: 0 12px; height: 56px; }
-      .cart-btn span { display: none; }
-      .modal-info { padding: 12px; }
-    }
-  </style>
+footer {
+  background: #050505;
+  border-top: 1px solid #181818;
+  padding: 46px 20px;
+  text-align: center;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+footer p { font-size: 12px; color: rgba(255,255,255,0.22); letter-spacing: 1px; line-height: 2; }
+</style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <a class="logo" href="#">
-    <div class="logo-icon">🔥</div>
-    <span class="logo-text">Descubrí Tu <span>Placer</span></span>
-  </a>
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Buscar productos…" autocomplete="off" />
+<div class="hero">
+  <span class="badge-top">★ Producto #1 en Satisfacción Masculina de Argentina</span>
+  <h1>POWER<br><span>PUMP</span><br>MEN 2.0</h1>
+  <p class="hero-sub">Descubrí tu Placer</p>
+  <p class="hero-desc">La bomba de vacío profesional más avanzada del mercado. Diseñada para hombres que quieren más — más confianza, más intensidad, más placer.</p>
+  <div class="stars-hero">★★★★★</div>
+  <p class="stars-label">+2.800 hombres satisfechos en toda Argentina</p>
+  <a class="cta-primary" href="#">QUIERO EL MÍO AHORA</a>
+  <div class="scroll-hint">
+    Scrolleá para descubrir
+    <div class="scroll-line"></div>
   </div>
-  <button class="cart-btn" onclick="showToast('🛒 Carrito disponible próximamente')">
-    🛒 <span>Carrito</span>
-  </button>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <h1>Catálogo de Productos</h1>
-  <p>La mejor selección de productos para adultos. Envíos 100% discretos a todo el país.</p>
-  <div class="badges">
-    <div class="badge">📦 <span>Envíos</span> discretos</div>
-    <div class="badge">🔒 <span>Compra</span> segura</div>
-    <div class="badge">⚡ <span>+100</span> productos</div>
-    <div class="badge">💳 <span>Todos</span> los medios de pago</div>
-  </div>
-</section>
-
-<!-- CATEGORIES -->
-<div class="categories-section">
-  <p class="section-title">Categorías</p>
-  <div class="categories-scroll" id="catFilters"></div>
 </div>
 
-<!-- PRODUCTS -->
-<section class="products-section">
-  <div class="grid-header">
-    <span class="results-count" id="resultsCount"></span>
-    <select class="sort-select" id="sortSelect">
-      <option value="default">Ordenar por: Relevancia</option>
-      <option value="name-asc">Nombre A–Z</option>
-      <option value="name-desc">Nombre Z–A</option>
-    </select>
-  </div>
-  <div class="products-grid" id="productsGrid"></div>
-  <div class="empty" id="emptyState" style="display:none">
-    <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <p>No se encontraron productos para tu búsqueda.</p>
-  </div>
-</section>
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">2.800+</span><span class="stat-label">Clientes</span></div>
+  <div class="stat-item"><span class="stat-num">4.9★</span><span class="stat-label">Calificación</span></div>
+  <div class="stat-item"><span class="stat-num">48hs</span><span class="stat-label">Envío Express</span></div>
+  <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Discreción</span></div>
+  <div class="stat-item"><span class="stat-num">30d</span><span class="stat-label">Garantía</span></div>
+</div>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
-    <button class="modal-close" onclick="closeModalBtn()">✕</button>
-    <div class="modal-body">
-      <div class="modal-gallery">
-        <img class="modal-main-img" id="modalMainImg" src="" alt="" />
-        <div class="modal-thumbs" id="modalThumbs"></div>
+<div style="background: #0a0a0a;">
+  <div class="section-wrapper">
+    <span class="section-label">¿Por qué elegirnos?</span>
+    <h2 class="section-title">El poder que<br><span>siempre quisiste</span></h2>
+    <p class="section-desc">Tecnología de vacío de precisión clínica, ahora disponible para uso personal. Sin límites, sin excusas, resultados reales.</p>
+    <div class="divider"></div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">⚡</div>
+        <h3>Resultados desde el Día 1</h3>
+        <p>Efecto visible e inmediato desde la primera sesión. Resultados progresivos y acumulativos con uso constante.</p>
       </div>
-      <div class="modal-info">
-        <div class="modal-cat" id="modalCat"></div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-price" id="modalPrice"></div>
-        <div class="modal-desc" id="modalDesc"></div>
-        <ul class="modal-features" id="modalFeatures"></ul>
-        <button class="modal-add-btn" onclick="showToast('✅ Producto agregado al carrito')">Agregar al carrito</button>
-        <button class="modal-wish-btn" onclick="showToast('❤️ Guardado en favoritos')">♡ Guardar en favoritos</button>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔒</div>
+        <h3>Sistema de Vacío Pro</h3>
+        <p>Válvula de liberación rápida con control de presión milimétrico. Máxima comodidad y seguridad absoluta.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💎</div>
+        <h3>Materiales de Calidad Premium</h3>
+        <p>Cilindro acrílico de alta resistencia, manguera flexible de grado médico, empuñadura ergonómica antideslizante.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🎁</div>
+        <h3>Sleeve Large de Regalo</h3>
+        <p>Sleeve de silicona talle large incluido sin costo adicional — valorado en $4.900. Compatible con toda la línea.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📏</div>
+        <h3>Escala Milimétrica</h3>
+        <p>Medición integrada en el cilindro para seguir tu progreso de forma precisa. Motivación real, resultados medibles.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📦</div>
+        <h3>Envío 100% Discreto</h3>
+        <p>Packaging neutro sin logos ni indicios del contenido. Tu privacidad es nuestra prioridad. Llega a tu puerta.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="variants-bg">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <span class="section-label">Elegí tu kit</span>
+    <h2 class="section-title">Encontrá la opción<br><span>perfecta para vos</span></h2>
+    <p class="section-desc">Tres kits diseñados para distintos objetivos. Todos incluyen envío discreto y garantía de 30 días.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="variants-grid">
+    <div class="variant-card">
+      <span class="variant-icon">🔵</span>
+      <div class="variant-name">Kit Starter</div>
+      <div class="variant-desc">Ideal para comenzar tu transformación. Kit básico con todo lo esencial.</div>
+      <ul class="variant-features">
+        <li>Bomba Power Pump Men 2.0</li>
+        <li>Sleeve standard incluido</li>
+        <li>Guía de uso rápido</li>
+        <li>Garantía 30 días</li>
+      </ul>
+      <div class="variant-price">$24.900</div>
+      <div class="variant-old">Antes: $31.000</div>
+      <button class="btn-variant">ELEGIR STARTER</button>
+    </div>
+    <div class="variant-card" style="border-color: var(--gold);">
+      <div class="variant-badge gold-badge">★ MÁS VENDIDO</div>
+      <span class="variant-icon">⚫</span>
+      <div class="variant-name">Power 2.0 Original</div>
+      <div class="variant-desc">El kit estrella. La experiencia completa que miles de hombres ya eligieron.</div>
+      <ul class="variant-features">
+        <li>Bomba Power Pump Men 2.0</li>
+        <li>Sleeve LARGE de regalo</li>
+        <li>Guía premium de uso</li>
+        <li>Soporte prioritario</li>
+        <li>Garantía 30 días</li>
+      </ul>
+      <div class="variant-price">$34.900</div>
+      <div class="variant-old">Antes: $45.000</div>
+      <button class="btn-variant active">ELEGIR POWER 2.0</button>
+    </div>
+    <div class="variant-card">
+      <div class="variant-badge">STOCK LIMITADO</div>
+      <span class="variant-icon">🔴</span>
+      <div class="variant-name">Elite Bundle</div>
+      <div class="variant-desc">La experiencia máxima. Para quienes no aceptan límites.</div>
+      <ul class="variant-features">
+        <li>Bomba Power Pump Men 2.0</li>
+        <li>3 Sleeves: S / M / L</li>
+        <li>Anillo de erección incluido</li>
+        <li>Lubricante premium</li>
+        <li>Garantía 30 días extendida</li>
+      </ul>
+      <div class="variant-price">$54.900</div>
+      <div class="variant-old">Antes: $72.000</div>
+      <button class="btn-variant">ELEGIR ELITE</button>
+    </div>
+  </div>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2024 <strong>Descubrí Tu Placer</strong> — Todos los derechos reservados</p>
-  <p style="margin-top:6px">Envíos discretos · Compras seguras · Atención personalizada</p>
-</footer>
-
-<script>
-// ─── PRODUCT DATA ───────────────────────────────────────────────────────────
-const products = [
-  // ANAL
-  {
-    id: 1, name: "Consolador Anal Inflable Silicona 9cm",
-    category: "Anal", tag: "new",
-    images: [
-      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-05b881415e77470b9a1979f707431342.jpg",
-      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-685592b74e9d4b65af200da0e86a73a4.jpg",
-      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-9c24b62515df495d936a1fdec59f8fd1.jpg",
-      "ANAL/bi-040096q-consolador-anal-inflable-silicona-9cm-x-3cm-e4ea35a91dab4ccfa78dd24d1f35f461.jpg",
-    ],
-    desc: "Consolador anal inflable fabricado en silicona premium. Diseño ergonómico para mayor comodidad. Sistema de inflado incluido.",
-    features: ["Material: Silicona suave", "Tamaño: 9cm x 3cm", "Sistema inflable", "Fácil limpieza"],
-    price: "$ 4.500"
-  },
-  {
-    id: 2, name: "Booty Call Set — Negro",
-    category: "Anal", tag: "",
-    images: [
-      "ANAL/ee73-774-0118-booty-call-set-of-black-002740d965f34dc8b3d0cdc2e9062821.jpg",
-      "ANAL/ee73-774-0118-booty-call-set-of-black-71c0f8bcdeef4b699e2b02041bc71aad.jpg",
-    ],
-    desc: "Set completo para estimulación anal. Incluye múltiples accesorios de diferentes tamaños para principiantes y avanzados.",
-    features: ["Set de 3 piezas", "Material no poroso", "Tamaños progresivos", "Base de seguridad"],
-    price: "$ 6.200"
-  },
-  {
-    id: 3, name: "Nicole — Vibrador Anal Multifuncional USB",
-    category: "Anal", tag: "hot",
-    images: [
-      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-0db6432f74bb47c3b430d2f16eac1900.jpg",
-      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-9e4e929ea53e4472be1d0e082313997d.jpg",
-      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-d0b97647c6fb4e95934aa670255de57a.jpg",
-      "shd-s278-nicole-vibrador-anal-multifuncional-recargable-usb-f70ae551208644be90995799fe60a5f4.jpg",
-    ],
-    desc: "Vibrador anal multifuncional recargable vía USB. Potente motor silencioso con múltiples velocidades y patrones de vibración.",
-    features: ["Recargable USB", "10 modos de vibración", "Silicona médica", "Impermeable IPX7"],
-    price: "$ 8.900"
-  },
-
-  // ARNES
-  {
-    id: 4, name: "Arnés Prótesis Vibrador 17cm x 5.5cm",
-    category: "Arnés", tag: "new",
-    images: [
-      "ARNES/bw-010025-arnes-protesis-vibrador-17cm-x-55cm-25c93258fe4e48e98df2249219004bf4.jpg",
-      "ARNES/bw-010025-arnes-protesis-vibrador-17cm-x-55cm-5c5cd1d1ef5c4ccb9c44f1044a3c2dad.jpg",
-      "ARNES/bw-010025-arnes-protesis-vibrador-17cm-x-55cm-80d1fb0e4e984c6dbdb5960bfe97b793.jpg",
-    ],
-    desc: "Arnés ajustable con prótesis vibrador de 17cm. Cintas regulables para mayor comodidad. Motor vibrador integrado.",
-    features: ["17cm x 5.5cm", "Arnés ajustable", "Vibrador integrado", "Material suave"],
-    price: "$ 12.500"
-  },
-  {
-    id: 5, name: "Arnés BW-010026 — Set Completo",
-    category: "Arnés", tag: "",
-    images: [
-      "ARNES/BW-010026%20(1).jpg",
-      "ARNES/BW-010026%20(2).jpg",
-      "ARNES/BW-010026%20(3).jpg",
-      "ARNES/BW-010026%20(4).jpg",
-    ],
-    desc: "Set completo de arnés con accesorios. Correas ajustables y material resistente para mayor durabilidad.",
-    features: ["Set completo", "Correas ajustables", "Material premium", "Fácil de poner"],
-    price: "$ 10.800"
-  },
-
-  // GELES
-  {
-    id: 6, name: "Serum Concentrado EOS Tightening 25ml",
-    category: "Geles", tag: "new",
-    images: [
-      "sic02-serum-concentrado-eos-tightening-pleasure-25ml-2951a40139ee4e4a9739a6835dfa8e56.jpg",
-      "sic02-serum-concentrado-eos-tightening-pleasure-25ml-2cfde4899f544ebaad36738a9b1e6797.jpg",
-      "sic02-serum-concentrado-eos-tightening-pleasure-25ml-8cf1c799cc634685a32f9da9dfd1ce0f.jpg",
-    ],
-    desc: "Serum concentrado para mayor placer e intensidad. Fórmula especial de 25ml. Acción tightening para mayor sensibilidad.",
-    features: ["25ml", "Fórmula concentrada", "Efecto intensificador", "Uso íntimo"],
-    price: "$ 2.800"
-  },
-  {
-    id: 7, name: "Gel Lubricante Premium",
-    category: "Geles", tag: "",
-    images: [
-      "GELES/D_NQ_NP_2X_810875-MLA43532828271_092020-F.png",
-      "GELES/D_NQ_NP_808403-MLA40180445634_122019-O.png",
-    ],
-    desc: "Lubricante premium de base acuosa. Compatible con todos los materiales. Fórmula hipoalergénica y de larga duración.",
-    features: ["Base acuosa", "Hipoalergénico", "Larga duración", "Compatible con látex"],
-    price: "$ 1.900"
-  },
-  {
-    id: 8, name: "Pack Lubricantes Variados",
-    category: "Geles", tag: "hot",
-    images: [
-      "bodegon-succionadores-min.jpg",
-      "GELES/D_NQ_NP_611702-MLA48322520105_112021-O.webp",
-      "GELES/D_NQ_NP_621380-MLA48322586497_112021-O.webp",
-    ],
-    desc: "Pack con variedad de lubricantes para diferentes experiencias. Incluye lubricantes de efecto calor, frío e intensificador.",
-    features: ["Pack x3 unidades", "Efecto calor y frío", "Sin parabenos", "Aroma neutro"],
-    price: "$ 4.200"
-  },
-
-  // ANILLOS
-  {
-    id: 9, name: "Anillo Vibrador Osmond Silicona",
-    category: "Anillos", tag: "hot",
-    images: [
-      "bi-210169-anillo-vibrador-osmond-silicona-4f653ae7946e45509769361b8f6a45ff.jpg",
-      "bi-210169-anillo-vibrador-osmond-silicona-61329fdecfb34554a78b565b9c90b633.jpg",
-      "bi-210169-anillo-vibrador-osmond-silicona-7ab033e375d24e95b0b8d30c0234134c.jpg",
-      "bi-210169-anillo-vibrador-osmond-silicona-8aea67fe25b64d14a752893c8a32a8c8.jpg",
-    ],
-    desc: "Anillo vibrador en silicona suave. Motor silencioso de alta potencia. Diseño ergonómico para estimulación mutua.",
-    features: ["Silicona médica", "10 velocidades", "Motor silencioso", "Resistente al agua"],
-    price: "$ 3.600"
-  },
-  {
-    id: 10, name: "Anillo Vibrador Cobra Silicona",
-    category: "Anillos", tag: "",
-    images: [
-      "anillos%20retardantes/bi-210147-anillo-vibrador-cobra-silicona-0602fd5405734632ab28d592f8fa80e2.jpg",
-      "anillos%20retardantes/bi-210147-anillo-vibrador-cobra-silicona-29231aeb0c3a44d493465801dc9d5f42.jpg",
-      "anillos%20retardantes/bi-210147-anillo-vibrador-cobra-silicona-43f5f946e62542de9ad3bf905bdbc6fb.jpg",
-    ],
-    desc: "Anillo vibrador con diseño cobra en silicona premium. Retarda la eyaculación y amplifica el placer para ambos.",
-    features: ["Diseño cobra", "Efecto retardante", "Silicona flexible", "Batería incluida"],
-    price: "$ 3.200"
-  },
-  {
-    id: 11, name: "Anillos para Pene — Pack x5",
-    category: "Anillos", tag: "new",
-    images: [
-      "anillos/1615261543138695.jpg",
-      "anillos/1615261543317937.jpg",
-      "anillos/1615261543517525.jpg",
-      "anillos/1618627780753273.jpg",
-    ],
-    desc: "Set de 5 anillos en diferentes tamaños y grosores. Material elástico de alta calidad. Ideales para principiantes.",
-    features: ["Pack x5", "Tallas variadas", "Elástico premium", "Fácil de usar"],
-    price: "$ 1.800"
-  },
-
-  // SUCCIONADOR
-  {
-    id: 12, name: "Succionador de Clítoris N°2",
-    category: "Succionador", tag: "hot",
-    images: [
-      "succionador%20de%20clitoris/j2018-u7-number-two-5f3cf1f4288f4d89921897ab15032728.jpg",
-      "succionador%20de%20clitoris/j2018-u7-number-two-6bf6ce067577492fac0a3d385e103e39.jpg",
-      "succionador%20de%20clitoris/j2018-u7-number-two-ab6a1820c0994c8cab696d79866ac3a3.jpg",
-      "succionador%20de%20clitoris/j2018-u7-number-two-b9cacbfd490342e19f5e85ad4708e48a.jpg",
-    ],
-    desc: "Succionador de clítoris con tecnología de ondas de presión. Sin contacto directo para una estimulación única e intensa.",
-    features: ["10 modos de succión", "Ondas de presión", "Silencioso", "Recargable USB"],
-    price: "$ 9.500"
-  },
-  {
-    id: 13, name: "Succionadores — Set Premium",
-    category: "Succionador", tag: "",
-    images: [
-      "succionadores.jpeg",
-    ],
-    desc: "Set premium de succionadores de diferentes intensidades. Perfectos para estimulación de pezones y zonas erógenas.",
-    features: ["Set variado", "Múltiples tamaños", "Ventosa de silicona", "Fácil uso"],
-    price: "$ 2.400"
-  },
-
-  // TORSO
-  {
-    id: 14, name: "Cola Ano Vagina Cyberskin FT-1B006",
-    category: "Torso", tag: "new",
-    images: [
-      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-19d3a522635c4c0a90233ebf9dbf9cc3.jpg",
-      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-4e786c7ef24b4312a42f2827bf982b8a.jpg",
-      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-79656a64769641fd91e79618efa02a8b.jpg",
-      "TORSO/ft-1b006-cola-ano-vagina-cyberskin-8f5905ff37744ce588236c66ff5bbfc0.jpg",
-    ],
-    desc: "Torso realístico en material cyberskin ultrasuave. Textura que imita la piel real. Doble entrada para mayor versatilidad.",
-    features: ["Material Cyberskin", "Doble entrada", "Ultra realístico", "Fácil limpieza"],
-    price: "$ 18.500"
-  },
-
-  // MASAJEADOR
-  {
-    id: 15, name: "Vibrador Masajeador Multifunción USB",
-    category: "Masajeador", tag: "hot",
-    images: [
-      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-01d6c40d9d544466bfcc04290eb5c853.jpg",
-      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-098bed35c2f74df78ff981e3decfa216.jpg",
-      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-0fd31d3cc476478ca1457196d6b17fb9.jpg",
-      "masajeador/bw-055013-vibrador-masajeador-multifuncion-recargable-silicona-18697f702caa4e60af6f41d2a190c982.jpg",
-    ],
-    desc: "Masajeador multifunción recargable vía USB. Cabezal flexible para llegar a zonas difíciles. Silicona médica hipoalergénica.",
-    features: ["Recargable USB", "Cabezal flexible", "12 funciones", "Silicona médica"],
-    price: "$ 11.200"
-  },
-
-  // VAGINA
-  {
-    id: 16, name: "Vagina Realística Premium",
-    category: "Vagina", tag: "",
-    images: [
-      "vagina/BM-00900T27N_02.jpg",
-      "vagina/BM-00900T27N_03.jpg",
-      "vagina/BM-00900T27N_04.jpg",
-      "vagina/BM-00900T27N_05.jpg",
-    ],
-    desc: "Vagina realística en material ultrasuave. Interior texturizado para mayor estimulación. Diseño compacto y discreto.",
-    features: ["Material ultrasuave", "Interior texturizado", "Compacta", "Fácil limpieza"],
-    price: "$ 7.800"
-  },
-
-  // EXTENSORES
-  {
-    id: 17, name: "Extensor de Pene — Kit Completo",
-    category: "Extensores", tag: "new",
-    images: [
-      "extensor.png",
-      "EXTENSORES/Imagenes_CW110538/cw110538-bomba-passion-pump-manija-manometro-2eca572daf454c339cb6e687845ba4de.jpg",
-      "EXTENSORES/Imagenes_CW110538/cw110538-bomba-passion-pump-manija-manometro-c5faff353a4442b5ab00be43e4350093.jpg",
-    ],
-    desc: "Kit extensor premium con múltiples fundas de diferente longitud y grosor. Material silicona flexible y realístico.",
-    features: ["Kit 3 piezas", "Silicona realística", "Tallas variadas", "Base segura"],
-    price: "$ 8.400"
-  },
-
-  // BALA
-  {
-    id: 18, name: "Bala Vibradora Power Bullet",
-    category: "Bala", tag: "hot",
-    images: [
-      "bala.jpeg",
-    ],
-    desc: "Bala vibradora potente y discreta. Perfecta para estimulación puntual. Múltiples velocidades y patrones.",
-    features: ["Ultra potente", "10 velocidades", "Discreta", "Pila AA incluida"],
-    price: "$ 2.200"
-  },
-  {
-    id: 19, name: "Zenbala — Bola de Kegel Silicona",
-    category: "Bala", tag: "new",
-    images: [
-      "Zenbala-1-unid-suave-reemplazo-de-silicona-para-bomba-de-vac-o-del-pene-cilindro-Camilla.jpg",
-    ],
-    desc: "Bola de kegel en silicona suave para fortalecer el suelo pélvico. Peso calibrado para ejercicios progresivos.",
-    features: ["Silicona médica", "Peso calibrado", "Cordón de recuperación", "Para ejercicio pélvico"],
-    price: "$ 3.100"
-  },
-
-  // PEZONERAS
-  {
-    id: 20, name: "Pezoneras con Vibración",
-    category: "Pezoneras", tag: "",
-    images: [
-      "PEZONERAS/whatsapp_image_2021-12-07_at_18.18.49.jpeg",
-      "PEZONERAS/WhatsApp%20Image%202022-07-21%20at%2010.18.25%20AM.jpeg",
-      "PEZONERAS/WhatsApp%20Image%202022-07-21%20at%2010.18.25%20AM%20(1).jpeg",
-    ],
-    desc: "Pezoneras con micro vibrador integrado. Succión ajustable y vibración para máxima estimulación.",
-    features: ["Vibración integrada", "Succión ajustable", "Silicona suave", "Par incluido"],
-    price: "$ 2.900"
-  },
-];
-
-// ─── STATE ───────────────────────────────────────────────────────────────────
-let activeCategory = "Todos";
-let searchQuery = "";
-let currentProduct = null;
-
-// ─── CATEGORIES ──────────────────────────────────────────────────────────────
-const allCats = ["Todos", ...new Set(products.map(p => p.category))];
-
-function renderCats() {
-  const wrap = document.getElementById("catFilters");
-  wrap.innerHTML = allCats.map(c => `
-    <button class="cat-btn ${c === activeCategory ? 'active' : ''}" onclick="setCategory('${c}')">${c}</button>
-  `).join("");
-}
-
-function setCategory(cat) {
-  activeCategory = cat;
-  renderCats();
-  renderGrid();
-}
-
-// ─── GRID ─────────────────────────────────────────────────────────────────────
-function getFiltered() {
-  let list = products.filter(p => {
-    const matchCat = activeCategory === "Todos" || p.category === activeCategory;
-    const q = searchQuery.toLowerCase();
-    const matchQ = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
-    return matchCat && matchQ;
-  });
-
-  const sort = document.getElementById("sortSelect").value;
-  if (sort === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
-  if (sort === "name-desc") list.sort((a, b) => b.name.localeCompare(a.name));
-
-  return list;
-}
-
-function renderGrid() {
-  const list = getFiltered();
-  const grid = document.getElementById("productsGrid");
-  const empty = document.getElementById("emptyState");
-  const count = document.getElementById("resultsCount");
-
-  count.textContent = `${list.length} producto${list.length !== 1 ? 's' : ''}`;
-
-  if (!list.length) {
-    grid.innerHTML = "";
-    empty.style.display = "block";
-    return;
-  }
-  empty.style.display = "none";
-
-  grid.innerHTML = list.map(p => `
-    <div class="product-card" onclick="openModal(${p.id})">
-      <div class="card-img-wrap">
-        <img class="card-img" src="${p.images[0]}" alt="${p.name}" loading="lazy"
-             onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><rect fill=\'%231a1a1a\' width=\'200\' height=\'200\'/><text fill=\'%23444\' font-size=\'40\' x=\'50%\' y=\'50%\' text-anchor=\'middle\' dy=\'.35em\'>📦</text></svg>'" />
-        ${p.tag === 'new' ? '<span class="tag-new">NUEVO</span>' : ''}
-        ${p.tag === 'hot' ? '<span class="tag-hot">🔥 HOT</span>' : ''}
+<div style="background: #0a0a0a;">
+  <div class="section-wrapper">
+    <span class="section-label">Modo de uso</span>
+    <h2 class="section-title">Simple, seguro,<br><span>extraordinario</span></h2>
+    <p class="section-desc">Cuatro pasos para una experiencia que va a cambiar tu vida.</p>
+    <div class="divider"></div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Preparación</h3>
+        <p>Hidratá la zona y colocá el sleeve de silicona en la base del cilindro para un sellado perfecto y cómodo.</p>
       </div>
-      <div class="card-body">
-        <div class="card-category">${p.category}</div>
-        <div class="card-name">${p.name}</div>
-        <div class="card-footer">
-          <span class="card-price">${p.price}</span>
-          <button class="card-add" onclick="event.stopPropagation(); showToast('✅ Agregado al carrito')">+ Agregar</button>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Activación</h3>
+        <p>Presionás la manija de vacío de forma gradual y controlada. La válvula regula la presión automáticamente.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Sesión</h3>
+        <p>10 a 20 minutos por sesión. La escala milimétrica te permite medir y registrar tu progreso real.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <h3>Resultado</h3>
+        <p>Liberás la válvula y disfrutás resultados inmediatos. Consistencia + tiempo = transformación garantizada.</p>
+      </div>
+    </div>
+    <div class="guarantee">
+      <span class="guarantee-icon">🛡️</span>
+      <h3>Garantía Total de 30 Días</h3>
+      <p>Si por cualquier motivo no quedás 100% satisfecho en los primeros 30 días, te devolvemos tu dinero completamente. Sin preguntas, sin trámites, sin burocracia.</p>
+    </div>
+  </div>
+</div>
+
+<div class="testimonials-bg">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+    <span class="section-label">Testimonios reales</span>
+    <h2 class="section-title">Ellos ya lo<br><span>transformaron</span></h2>
+    <p class="section-desc">Hombres reales, resultados reales. Sin filtros, sin actores pagos.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Dudé mucho antes de comprarlo, pero después de 3 semanas no puedo creer la diferencia. Mi confianza cambió completamente. El envío fue rapidísimo y sin ningún problema de discreción."</p>
+      <div class="test-author">
+        <div class="test-avatar">MG</div>
+        <div>
+          <div class="test-name">Martín G.</div>
+          <div class="test-loc">Buenos Aires · Compra verificada</div>
         </div>
       </div>
     </div>
-  `).join("");
-}
+    <div class="testimonial-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"La calidad del producto es impresionante. El sleeve de regalo solo ya vale la plata. Resultados desde la primera semana. Muy fácil de usar, ideal si sos principiante. Lo recomiendo 100%."</p>
+      <div class="test-author">
+        <div class="test-avatar">RV</div>
+        <div>
+          <div class="test-name">Rodrigo V.</div>
+          <div class="test-loc">Córdoba · Compra verificada</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Compré el Elite Bundle y fue la mejor inversión del año. La diferencia en mi vida íntima fue total. El packaging discreto fue clave para mí. El equipo de atención al cliente, de primera."</p>
+      <div class="test-author">
+        <div class="test-avatar">JL</div>
+        <div>
+          <div class="test-name">Julián L.</div>
+          <div class="test-loc">Rosario · Compra verificada</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Al principio tenía mis dudas, pero la garantía de 30 días me animó a probarlo. Para qué decirte, ni la necesité. Resultados reales, producto sólido, empresa seria. Diez puntos."</p>
+      <div class="test-author">
+        <div class="test-avatar">EP</div>
+        <div>
+          <div class="test-name">Esteban P.</div>
+          <div class="test-loc">Mendoza · Compra verificada</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Llevo 2 meses usando el Power 2.0 y los resultados son constantes y reales. La escala graduada es un detalle increíble para ver el progreso. Producto de altísima calidad."</p>
+      <div class="test-author">
+        <div class="test-avatar">FL</div>
+        <div>
+          <div class="test-name">Fernando L.</div>
+          <div class="test-loc">La Plata · Compra verificada</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Mi pareja notó la diferencia antes que yo. Eso dice todo. La bomba es robusta, el diseño es profesional y el sistema de vacío funciona perfecto. Vale absolutamente cada peso invertido."</p>
+      <div class="test-author">
+        <div class="test-avatar">NC</div>
+        <div>
+          <div class="test-name">Nicolás C.</div>
+          <div class="test-loc">Tucumán · Compra verificada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-// ─── MODAL ───────────────────────────────────────────────────────────────────
-function openModal(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return;
-  currentProduct = p;
+<div class="cta-final">
+  <h2>Tu mejor versión<br><span>empieza hoy</span></h2>
+  <p>No esperés más. Miles de hombres en Argentina ya dieron el paso.</p>
+  <span class="price-big">$34.900</span>
+  <p class="price-note">Precio especial por tiempo limitado · Sleeve Large incluido · Envío express 48hs</p>
+  <a class="cta-primary" href="#" style="font-size: 18px; padding: 22px 60px;">🛒 COMPRÁ AHORA CON DESCUENTO</a>
+  <div class="trust-items">
+    <div class="trust-item"><span>✓</span> Garantía 30 días</div>
+    <div class="trust-item"><span>✓</span> Pago 100% seguro</div>
+    <div class="trust-item"><span>✓</span> Envío discreto</div>
+    <div class="trust-item"><span>✓</span> Atención personalizada</div>
+  </div>
+</div>
 
-  document.getElementById("modalCat").textContent = p.category;
-  document.getElementById("modalTitle").textContent = p.name;
-  document.getElementById("modalPrice").textContent = p.price;
-  document.getElementById("modalDesc").textContent = p.desc;
-  document.getElementById("modalMainImg").src = p.images[0];
-  document.getElementById("modalMainImg").alt = p.name;
+<footer>
+  <div class="footer-brand">POWER PUMP MEN 2.0</div>
+  <p>by INFARTA™ · Todos los derechos reservados</p>
+  <p>Envíos a todo Argentina · Atención al cliente: lunes a viernes 9 a 18hs</p>
+  <p style="margin-top: 14px; color: rgba(255,255,255,0.14);">Producto exclusivo para adultos mayores de 18 años</p>
+</footer>
 
-  const featEl = document.getElementById("modalFeatures");
-  featEl.innerHTML = p.features.map(f => `<li>${f}</li>`).join("");
-
-  const thumbsEl = document.getElementById("modalThumbs");
-  thumbsEl.innerHTML = p.images.map((img, i) => `
-    <img class="modal-thumb ${i === 0 ? 'active' : ''}"
-         src="${img}" alt="${p.name}" loading="lazy"
-         onclick="setMainImg('${img}', this)"
-         onerror="this.style.display='none'" />
-  `).join("");
-
-  document.getElementById("modalOverlay").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function setMainImg(src, thumbEl) {
-  document.getElementById("modalMainImg").src = src;
-  document.querySelectorAll(".modal-thumb").forEach(t => t.classList.remove("active"));
-  thumbEl.classList.add("active");
-}
-
-function closeModal(e) {
-  if (e.target === document.getElementById("modalOverlay")) closeModalBtn();
-}
-function closeModalBtn() {
-  document.getElementById("modalOverlay").classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-// ─── TOAST ───────────────────────────────────────────────────────────────────
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
-}
-
-// ─── EVENTS ──────────────────────────────────────────────────────────────────
-document.getElementById("searchInput").addEventListener("input", e => {
-  searchQuery = e.target.value;
-  renderGrid();
-});
-document.getElementById("sortSelect").addEventListener("change", renderGrid);
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeModalBtn();
-});
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
-renderCats();
-renderGrid();
-</script>
 </body>
 </html>
