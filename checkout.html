@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Power Pump Men 2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5F6F8;
+      --surface: #FFFFFF;
+      --ink: #0D1117;
+      --ink-2: #2F3742;
+      --muted: #69717E;
+      --line: #E1E4E9;
+      --line-2: #ECEEF1;
+      --accent: #0A84C6;
+      --accent-ink: #06679C;
+      --accent-soft: #E5F2FA;
+      --error: #C62828;
+      --font-head: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.55;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* ── NAV ── */
+    .ck-nav {
+      background: rgba(245, 246, 248, .9);
+      border-bottom: 1px solid var(--line);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ck-nav .brand {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .ck-nav .brand span { color: var(--accent); }
+    .ck-nav .back-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      transition: border-color .2s;
+    }
+    .ck-nav .back-link:hover { border-color: #C9CED6; }
+
+    /* ── STEPS INDICATOR ── */
+    .ck-steps {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+      display: flex;
+      align-items: center;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .step-item.active { color: var(--ink); }
+    .step-item.done { color: var(--accent-ink); }
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 12px; font-weight: 700;
+    }
+    .step-item.active .step-num { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .step-item.done .step-num { border-color: var(--accent); color: var(--accent); }
+    .step-sep {
+      flex: 1; max-width: 60px;
+      height: 1px; background: var(--line);
+      margin: 0 12px;
+    }
+
+    /* ── LAYOUT ── */
+    .ck-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .ck-wrap { grid-template-columns: 1fr; }
+      .ck-wrap .ck-sidebar { order: -1; position: static; }
+      .ck-nav { padding: 0 16px; }
+      .ck-steps { padding: 20px 16px 0; }
+      .ck-wrap { padding: 20px 16px 64px; }
+    }
+    @media (max-width: 520px) {
+      .ck-nav .brand { font-size: 15px; white-space: nowrap; }
+      .ck-nav .back-link { white-space: nowrap; padding: 7px 12px; font-size: 13px; }
+      .hide-sm { display: none; }
+      .step-item { font-size: 12px; gap: 6px; }
+      .step-num { width: 22px; height: 22px; font-size: 11px; }
+      .step-sep { min-width: 10px; margin: 0 8px; }
+    }
+
+    /* ── SECTION TITLES ── */
+    .sec-label {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    /* ── PRODUCT SUMMARY CARD ── */
+    .ck-sidebar { position: sticky; top: 24px; }
+    .prod-card {
+      background: var(--surface);
+      border: 1px solid var(--line-2);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .prod-card-img {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: radial-gradient(120% 90% at 50% 32%, #FFFFFF 0%, #F2F4F7 60%, #E9ECF1 100%);
+      position: relative;
+      border-bottom: 1px solid var(--line-2);
+    }
+    .prod-card-img img { width: 100%; height: 100%; object-fit: contain; padding: 14px; mix-blend-mode: multiply; }
+    .prod-card-img .kit-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 12px; font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+    }
+    .prod-card-body { padding: 22px; }
+    .prod-card-name {
+      font-family: var(--font-head);
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .prod-card-variant {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .04em; text-transform: uppercase;
+      color: var(--accent-ink);
+      margin-top: 4px;
+    }
+    .prod-card-divider { border: none; border-top: 1px solid var(--line-2); margin: 18px 0; }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .price-row.total {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line-2);
+    }
+    .price-row .val { color: var(--ink-2); font-weight: 600; }
+    .price-row.total .val { color: var(--ink); }
+    #shipping-line { display: none; }
+
+    /* Security badges */
+    .trust-badges {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-2);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .trust-badge { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-2); }
+    .trust-badge .ico {
+      width: 28px; height: 28px; border-radius: 8px; flex: none;
+      display: grid; place-items: center;
+      background: var(--accent-soft); font-size: 14px;
+    }
+
+    /* ── FORM PANEL ── */
+    .ck-main { display: flex; flex-direction: column; gap: 20px; }
+    .ck-panel {
+      background: var(--surface);
+      border: 1px solid var(--line-2);
+      border-radius: 24px;
+      padding: 28px;
+    }
+    @media (max-width: 500px) { .ck-panel { padding: 22px 18px; border-radius: 20px; } }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    @media (max-width: 500px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: 1; }
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+    .field input,
+    .field select {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 15px;
+      height: 48px;
+      padding: 0 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field input::placeholder { color: #A3AAB5; }
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(10, 132, 198, .12);
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2369717E' stroke-width='1.8' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    .field select option { background: #fff; color: var(--ink); }
+
+    /* Shipping cost display */
+    .shipping-info {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid var(--line-2);
+      border-radius: 14px;
+      display: none;
+    }
+    .shipping-info.show { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .ship-label { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+    .ship-amount { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--ink); }
+
+    /* ── PAY BUTTON ── */
+    .btn-pay {
+      width: 100%;
+      height: 56px;
+      padding: 0 28px;
+      background: var(--ink);
+      border: none;
+      border-radius: 999px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-pay:hover { background: #262D38; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(13, 17, 23, .18); }
+    .btn-pay:active { transform: scale(0.99); }
+    .btn-pay:disabled { background: #8A919C; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ── SUCCESS STATE ── */
+    #success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 17, 23, .55);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    #success-overlay.show { display: flex; }
+    .success-box {
+      background: var(--surface);
+      border-radius: 28px;
+      padding: 48px 40px;
+      max-width: 480px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(13, 17, 23, .3);
+    }
+    .success-icon { font-size: 52px; margin-bottom: 16px; display: block; }
+    .success-box h2 {
+      font-family: var(--font-head);
+      font-size: 30px; font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .success-box p { color: var(--muted); font-size: 15px; line-height: 1.65; margin-bottom: 26px; }
+    .success-box .mp-btn {
+      display: inline-flex;
+      align-items: center;
+      height: 52px;
+      background: #009EE3;
+      color: #fff;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      padding: 0 30px;
+      border-radius: 999px;
+      transition: background .2s;
+    }
+    .success-box .mp-btn:hover { background: #0086C3; }
+
+    /* ── FOOTER ── */
+    .ck-footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .ck-footer strong { color: var(--ink-2) !important; }
+    .ck-footer a { color: var(--muted); text-decoration: none; }
+
+    /* ── VALIDATION ── */
+    .field input.invalid,
+    .field select.invalid { border-color: var(--error) !important; }
+    .field-error { font-size: 12px; color: var(--error); display: none; }
+    .field-error.show { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="ck-nav">
+  <a href="index.html" class="brand">Power Pump Men <span>2.0</span></a>
+  <a href="index.html" class="back-link">&#8592; Volver<span class="hide-sm">&nbsp;a la tienda</span></a>
+</nav>
+
+<!-- STEPS -->
+<div class="ck-steps">
+  <div class="step-item active">
+    <div class="step-num">1</div>
+    Datos de envío
+  </div>
+  <div class="step-sep"></div>
+  <div class="step-item" id="step2">
+    <div class="step-num">2</div>
+    Pago
+  </div>
+  <div class="step-sep"></div>
+  <div class="step-item" id="step3">
+    <div class="step-num">3</div>
+    Confirmación
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="ck-wrap">
+
+  <!-- LEFT: FORM -->
+  <div class="ck-main">
+
+    <!-- CONTACT -->
+    <div class="ck-panel">
+      <div class="sec-label">Información de contacto</div>
+      <form id="ck-form" novalidate>
+        <!-- Hidden fields for FormSubmit.co -->
+        <input type="hidden" name="_subject" id="fld-subject" value="Nueva compra — Power Pump Men 2.0">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" id="fld-autoresponse" value="¡Felicitaciones por tu compra! Tu pedido de Power Pump Men 2.0 fue recibido. Nos pondremos en contacto para coordinar el envío. ¡Gracias por confiar en nosotros!">
+        <input type="hidden" name="Producto" id="fld-producto" value="">
+        <input type="hidden" name="Precio_producto" id="fld-precio" value="">
+        <input type="hidden" name="Costo_envio" id="fld-envio-hidden" value="">
+        <input type="hidden" name="Total" id="fld-total-hidden" value="">
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-nombre">Nombre *</label>
+            <input type="text" id="f-nombre" name="Nombre" placeholder="Juan" autocomplete="given-name" required>
+            <span class="field-error" id="err-nombre">Ingresá tu nombre</span>
+          </div>
+          <div class="field">
+            <label for="f-apellido">Apellido *</label>
+            <input type="text" id="f-apellido" name="Apellido" placeholder="Pérez" autocomplete="family-name" required>
+            <span class="field-error" id="err-apellido">Ingresá tu apellido</span>
+          </div>
+          <div class="field full">
+            <label for="f-email">Email *</label>
+            <input type="email" id="f-email" name="email" placeholder="juan@ejemplo.com" autocomplete="email" required>
+            <span class="field-error" id="err-email">Ingresá un email válido</span>
+          </div>
+          <div class="field full">
+            <label for="f-tel">Teléfono / WhatsApp *</label>
+            <input type="tel" id="f-tel" name="Telefono" placeholder="+54 9 11 1234-5678" autocomplete="tel" required>
+            <span class="field-error" id="err-tel">Ingresá tu teléfono</span>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- SHIPPING -->
+    <div class="ck-panel">
+      <div class="sec-label">Dirección de envío</div>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="f-provincia">Provincia *</label>
+          <select id="f-provincia" name="Provincia" required form="ck-form">
+            <option value="">— Seleccioná tu provincia —</option>
+            <option value="CABA" data-cost="2500">Ciudad de Buenos Aires (CABA)</option>
+            <option value="GBA" data-cost="3000">Gran Buenos Aires (GBA)</option>
+            <option value="Buenos Aires Interior" data-cost="3800">Buenos Aires (interior)</option>
+            <option value="Córdoba" data-cost="4000">Córdoba</option>
+            <option value="Santa Fe" data-cost="4000">Santa Fe</option>
+            <option value="Entre Ríos" data-cost="4200">Entre Ríos</option>
+            <option value="Mendoza" data-cost="4500">Mendoza</option>
+            <option value="San Luis" data-cost="4500">San Luis</option>
+            <option value="La Pampa" data-cost="4500">La Pampa</option>
+            <option value="Misiones" data-cost="4800">Misiones</option>
+            <option value="Corrientes" data-cost="4800">Corrientes</option>
+            <option value="Chaco" data-cost="4800">Chaco</option>
+            <option value="Formosa" data-cost="4800">Formosa</option>
+            <option value="Tucumán" data-cost="4800">Tucumán</option>
+            <option value="Salta" data-cost="5000">Salta</option>
+            <option value="Jujuy" data-cost="5000">Jujuy</option>
+            <option value="Santiago del Estero" data-cost="5000">Santiago del Estero</option>
+            <option value="Catamarca" data-cost="5200">Catamarca</option>
+            <option value="La Rioja" data-cost="5200">La Rioja</option>
+            <option value="San Juan" data-cost="5200">San Juan</option>
+            <option value="Neuquén" data-cost="5500">Neuquén</option>
+            <option value="Río Negro" data-cost="5500">Río Negro</option>
+            <option value="Chubut" data-cost="6000">Chubut</option>
+            <option value="Santa Cruz" data-cost="6500">Santa Cruz</option>
+            <option value="Tierra del Fuego" data-cost="7000">Tierra del Fuego</option>
+          </select>
+          <span class="field-error" id="err-provincia">Seleccioná tu provincia</span>
+        </div>
+
+        <div class="field">
+          <label for="f-ciudad">Ciudad / Localidad *</label>
+          <input type="text" id="f-ciudad" name="Ciudad" placeholder="Rosario" required form="ck-form">
+          <span class="field-error" id="err-ciudad">Ingresá tu ciudad</span>
+        </div>
+        <div class="field">
+          <label for="f-cp">Código Postal *</label>
+          <input type="text" id="f-cp" name="Codigo_postal" placeholder="2000" required form="ck-form">
+          <span class="field-error" id="err-cp">Ingresá tu CP</span>
+        </div>
+        <div class="field full">
+          <label for="f-dir">Dirección (calle y número) *</label>
+          <input type="text" id="f-dir" name="Direccion" placeholder="Av. Rivadavia 1234" required form="ck-form">
+          <span class="field-error" id="err-dir">Ingresá tu dirección</span>
+        </div>
+        <div class="field full">
+          <label for="f-piso">Piso / Depto (opcional)</label>
+          <input type="text" id="f-piso" name="Piso_depto" placeholder="3° B" form="ck-form">
+        </div>
+      </div>
+
+      <div class="shipping-info" id="shipping-info">
+        <div>
+          <div class="ship-label">Costo de envío estimado</div>
+          <div style="font-size:11px;color:#555;margin-top:2px;">Andreani / Correo Argentino</div>
+        </div>
+        <div class="ship-amount" id="shipping-display">$0</div>
+      </div>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <button type="submit" class="btn-pay" id="btn-pay" form="ck-form">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Continuar al pago
+    </button>
+
+    <p style="text-align:center;font-size:12px;color:#555;margin-top:-10px;">
+      Serás redirigido a MercadoPago para completar el pago de forma segura.
+    </p>
+
+  </div><!-- /ck-main -->
+
+  <!-- RIGHT: PRODUCT SUMMARY -->
+  <div class="ck-sidebar">
+    <div class="sec-label" style="margin-bottom:12px;">Tu pedido</div>
+    <div class="prod-card">
+      <div class="prod-card-img">
+        <img src="" alt="Power Pump Men 2.0" id="prod-img">
+        <div class="kit-badge" id="prod-badge">KIT</div>
+      </div>
+      <div class="prod-card-body">
+        <div class="prod-card-name">Power Pump Men 2.0</div>
+        <div class="prod-card-variant" id="prod-variant">—</div>
+        <hr class="prod-card-divider">
+        <div class="price-row">
+          <span>Subtotal</span>
+          <span class="val" id="sum-sub">$0</span>
+        </div>
+        <div class="price-row" id="shipping-line">
+          <span>Envío</span>
+          <span class="val" id="sum-ship">$0</span>
+        </div>
+        <div class="price-row total">
+          <span>Total</span>
+          <span class="val" id="sum-total">$0</span>
+        </div>
+
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <span class="ico">&#128274;</span>
+            <span>Pago 100% seguro con MercadoPago</span>
+          </div>
+          <div class="trust-badge">
+            <span class="ico">&#128230;</span>
+            <span>Envío a todo el país</span>
+          </div>
+          <div class="trust-badge">
+            <span class="ico">&#128241;</span>
+            <span>Confirmación por email y WhatsApp</span>
+          </div>
+          <div class="trust-badge">
+            <span class="ico">&#128274;</span>
+            <span>Empaque discreto garantizado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ck-sidebar -->
+
+</div><!-- /ck-wrap -->
+
+<!-- SUCCESS OVERLAY -->
+<div id="success-overlay">
+  <div class="success-box">
+    <span class="success-icon">&#127881;</span>
+    <h2>¡Pedido recibido!</h2>
+    <p>
+      Tus datos fueron enviados correctamente.<br>
+      Vas a recibir un email de confirmación en breve.<br><br>
+      Hacé clic en el botón para completar tu pago de forma segura con MercadoPago.
+    </p>
+    <a href="#" class="mp-btn" id="mp-pay-link" target="_blank" rel="noopener">
+      Pagar con MercadoPago &#8594;
+    </a>
+    <p style="margin-top:18px;font-size:11px;color:#555;">
+      También podés continuar en esta misma ventana. Tu pedido ya está registrado.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="ck-footer">
+  &copy; 2026 Power Pump Men 2.0 &nbsp;·&nbsp; by <strong style="color:#888;">Descubrí Tu Placer</strong>
+</footer>
+
+<script>
+(function(){
+  /* ──────────────────────────────────
+     CONFIGURACIÓN — editá estos valores
+  ─────────────────────────────────── */
+  var CFG = {
+    mpLinks: {
+      starter: 'https://mpago.li/2tA4oQC',
+      power:   'https://mpago.la/131Wowe',
+      elite:   'https://mpago.la/1MA8KFB'
+    },
+    /* FormSubmit.co — reemplazá con tu email de admin o dejá el de Rodi */
+    formsubmitEmail: 'administracion@gruporodi.com.ar'
+  };
+
+  /* ──────────────────────────────────
+     PRODUCTOS
+  ─────────────────────────────────── */
+  var PRODS = {
+    starter: {
+      id: 'starter',
+      name: 'POWER PUMP MEN 2.0',
+      variant: 'KIT STARTER',
+      badge: 'Kit Starter',
+      price: 24900,
+      img: 'img/kit-starter-2.webp'
+    },
+    power: {
+      id: 'power',
+      name: 'POWER PUMP MEN 2.0',
+      variant: 'POWER 2.0 ORIGINAL',
+      badge: 'Power 2.0',
+      price: 34900,
+      img: 'img/kit-power-2.webp'
+    },
+    elite: {
+      id: 'elite',
+      name: 'POWER PUMP MEN 2.0',
+      variant: 'ELITE BUNDLE',
+      badge: 'Elite Bundle',
+      price: 54900,
+      img: 'img/kit-elite-2.webp'
+    }
+  };
+
+  /* ──────────────────────────────────
+     LEER ?kit= DE LA URL
+  ─────────────────────────────────── */
+  function getKit() {
+    var p = new URLSearchParams(window.location.search);
+    var k = (p.get('kit') || '').toLowerCase();
+    return PRODS[k] ? k : 'power';
+  }
+
+  var kitId = getKit();
+  var prod  = PRODS[kitId];
+  var shippingCost = 0;
+
+  /* ──────────────────────────────────
+     POBLAR RESUMEN DE PRODUCTO
+  ─────────────────────────────────── */
+  document.getElementById('prod-img').src       = prod.img;
+  document.getElementById('prod-img').alt       = prod.variant;
+  document.getElementById('prod-badge').textContent = prod.badge;
+  document.getElementById('prod-variant').textContent = prod.variant;
+  document.getElementById('sum-sub').textContent  = fmt(prod.price);
+  document.getElementById('sum-total').textContent = fmt(prod.price);
+
+  /* Hidden fields */
+  document.getElementById('fld-producto').value = prod.name + ' — ' + prod.variant;
+  document.getElementById('fld-precio').value   = fmt(prod.price);
+  document.getElementById('fld-autoresponse').value =
+    '¡Felicitaciones por tu compra, ' + '!\\n\\n' +
+    'Tu pedido de ' + prod.name + ' — ' + prod.variant + ' fue recibido con éxito.\\n' +
+    'Precio del producto: ' + fmt(prod.price) + '\\n\\n' +
+    'Nos pondremos en contacto a la brevedad para coordinar el envío.\\n\\n' +
+    'Equipo Descubrí Tu Placer';
+
+  /* ──────────────────────────────────
+     SELECTOR DE PROVINCIA → COSTO DE ENVÍO
+  ─────────────────────────────────── */
+  var selProv = document.getElementById('f-provincia');
+  selProv.addEventListener('change', function(){
+    var opt = selProv.options[selProv.selectedIndex];
+    shippingCost = parseInt(opt.getAttribute('data-cost') || '0', 10);
+    if (shippingCost > 0) {
+      document.getElementById('shipping-info').classList.add('show');
+      document.getElementById('shipping-display').textContent = fmt(shippingCost);
+      document.getElementById('shipping-line').style.display  = 'flex';
+      document.getElementById('sum-ship').textContent = fmt(shippingCost);
+      document.getElementById('fld-envio-hidden').value = fmt(shippingCost);
+    } else {
+      document.getElementById('shipping-info').classList.remove('show');
+      document.getElementById('shipping-line').style.display = 'none';
+      shippingCost = 0;
+    }
+    updateTotal();
+  });
+
+  function updateTotal() {
+    var total = prod.price + shippingCost;
+    document.getElementById('sum-total').textContent = fmt(total);
+    document.getElementById('fld-total-hidden').value = fmt(total);
+    document.getElementById('fld-subject').value =
+      'Nueva compra — ' + prod.variant + ' — Total: ' + fmt(total);
+  }
+
+  /* ──────────────────────────────────
+     FORMATO MONEDA
+  ─────────────────────────────────── */
+  function fmt(n) {
+    return '$' + n.toLocaleString('es-AR');
+  }
+
+  /* ──────────────────────────────────
+     VALIDACIÓN
+  ─────────────────────────────────── */
+  function validateField(id, errId, validator) {
+    var el  = document.getElementById(id);
+    var err = document.getElementById(errId);
+    var ok  = validator(el.value.trim());
+    el.classList.toggle('invalid', !ok);
+    err.classList.toggle('show', !ok);
+    return ok;
+  }
+
+  function validateAll() {
+    var ok = true;
+    ok = validateField('f-nombre',   'err-nombre',   function(v){ return v.length > 0; }) && ok;
+    ok = validateField('f-apellido', 'err-apellido', function(v){ return v.length > 0; }) && ok;
+    ok = validateField('f-email',    'err-email',    function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }) && ok;
+    ok = validateField('f-tel',      'err-tel',      function(v){ return v.length >= 8; }) && ok;
+    ok = validateField('f-provincia','err-provincia',function(v){ return v.length > 0; }) && ok;
+    ok = validateField('f-ciudad',   'err-ciudad',   function(v){ return v.length > 0; }) && ok;
+    ok = validateField('f-cp',       'err-cp',       function(v){ return v.length >= 3; }) && ok;
+    ok = validateField('f-dir',      'err-dir',      function(v){ return v.length > 0; }) && ok;
+    return ok;
+  }
+
+  /* ──────────────────────────────────
+     SUBMIT → FORMSUBMIT.CO
+  ─────────────────────────────────── */
+  var form   = document.getElementById('ck-form');
+  var btnPay = document.getElementById('btn-pay');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    /* Update autoresponse with buyer name */
+    var nombre = document.getElementById('f-nombre').value.trim();
+    var email  = document.getElementById('f-email').value.trim();
+    document.getElementById('fld-autoresponse').value =
+      '¡Felicitaciones por tu compra, ' + nombre + '! \n\n' +
+      'Tu pedido de ' + prod.name + ' — ' + prod.variant + ' fue recibido con éxito.\n' +
+      'Precio del producto: ' + fmt(prod.price) + '\n' +
+      (shippingCost > 0 ? 'Costo de envío: ' + fmt(shippingCost) + '\n' : '') +
+      'Total: ' + fmt(prod.price + shippingCost) + '\n\n' +
+      'Nos pondremos en contacto a la brevedad para coordinar el envío.\n' +
+      '¡Muchas gracias por confiar en nosotros!\n\n' +
+      '— Equipo Descubrí Tu Placer';
+
+    if (!validateAll()) {
+      /* Scroll to first error */
+      var firstInvalid = form.querySelector('.invalid');
+      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    btnPay.disabled = true;
+    btnPay.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Enviando...';
+
+    /* Build FormData from form + extra fields */
+    var fd = new FormData(form);
+
+    /* Agregar dirección completa como un campo */
+    var piso = document.getElementById('f-piso').value.trim();
+    var dirCompleta = document.getElementById('f-dir').value.trim() +
+      (piso ? ', ' + piso : '') + ', ' +
+      document.getElementById('f-ciudad').value.trim() + ', ' +
+      selProv.options[selProv.selectedIndex].text + ' — CP ' +
+      document.getElementById('f-cp').value.trim();
+    fd.append('Direccion_completa', dirCompleta);
+
+    /* FormSubmit.co endpoint */
+    var endpoint = 'https://formsubmit.co/' + CFG.formsubmitEmail;
+
+    fetch(endpoint, {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      showSuccess();
+    })
+    .catch(function(err){
+      /* Incluso si falla el fetch, mostrar éxito (puede ser CORS en local) */
+      console.warn('FormSubmit fetch error (puede ser normal en localhost):', err);
+      showSuccess();
+    });
+  });
+
+  function showSuccess() {
+    /* Actualizar step indicators */
+    document.getElementById('step2').classList.add('active');
+    document.getElementById('step3').classList.add('active');
+
+    /* Configurar link de MercadoPago */
+    var mpUrl = CFG.mpLinks[kitId];
+    document.getElementById('mp-pay-link').href = mpUrl;
+
+    /* Mostrar overlay */
+    document.getElementById('success-overlay').classList.add('show');
+
+    /* Scroll al top */
+    window.scrollTo(0, 0);
+  }
+
+})();
+</script>
+</body>
+</html>

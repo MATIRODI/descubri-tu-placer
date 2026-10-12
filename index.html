@@ -3,654 +3,457 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Power Pump Men 2.0 — Descubrí tu Placer</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Barlow', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
-
-:root {
-  --gold: #c9a84c;
-  --gold-light: #e8c97a;
-  --dark: #0a0a0a;
-  --dark2: #111111;
-  --dark3: #1a1a1a;
-  --red: #c0392b;
+<title>Power Pump Men 2.0 — Bomba de vacío | Descubrí tu Placer</title>
+<meta name="description" content="Power Pump Men 2.0: bomba de vacío manual con tubo de medición, válvula de liberación y base de silicona. Miralo en 3D, elegí tu kit y recibilo con envío 100% discreto.">
+<meta name="theme-color" content="#F5F6F8">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
 }
-
-.hero {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 80px 20px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.badge-top {
-  background: var(--gold);
-  color: #0a0a0a;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 7px 24px;
-  border-radius: 30px;
-  margin-bottom: 36px;
-  display: inline-block;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(50px, 10vw, 100px);
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 14px;
-  letter-spacing: -3px;
-}
-.hero h1 span { color: var(--gold); }
-.hero-sub {
-  font-size: clamp(14px, 3vw, 20px);
-  color: rgba(255,255,255,0.45);
-  font-weight: 300;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  margin-bottom: 32px;
-}
-.hero-desc {
-  font-size: 18px;
-  color: rgba(255,255,255,0.65);
-  max-width: 560px;
-  line-height: 1.8;
-  margin-bottom: 50px;
-}
-.stars-hero { font-size: 24px; color: var(--gold); margin-bottom: 8px; letter-spacing: 6px; }
-.stars-label { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 50px; }
-.cta-primary {
-  background: var(--gold);
-  color: #0a0a0a;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 20px 54px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.cta-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-.scroll-hint {
-  margin-top: 70px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.25);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-.scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  margin: 12px auto 0;
-}
-
-.stats-bar {
-  background: var(--gold);
-  padding: 24px 20px;
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  flex-wrap: wrap;
-}
-.stat-item { text-align: center; }
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  font-weight: 900;
-  color: #0a0a0a;
-  display: block;
-}
-.stat-label { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.55); letter-spacing: 2px; text-transform: uppercase; }
-
-.section-wrapper { padding: 90px 20px; max-width: 1100px; margin: 0 auto; }
-.section-label {
-  font-size: 11px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 18px;
-  display: block;
-}
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-.section-title span { color: var(--gold); }
-.section-desc {
-  font-size: 17px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.8;
-  max-width: 580px;
-}
-.divider { width: 60px; height: 3px; background: var(--gold); margin: 30px 0; }
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2px;
-  margin-top: 60px;
-  background: #222;
-}
-.benefit-card {
-  background: #111;
-  padding: 44px 32px;
-  text-align: center;
-  transition: background 0.2s;
-}
-.benefit-card:hover { background: #181818; }
-.benefit-icon {
-  width: 60px; height: 60px;
-  background: rgba(201,168,76,0.1);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 22px;
-  font-size: 26px;
-}
-.benefit-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-.benefit-card p { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.8; }
-
-.variants-bg { background: #111; padding: 90px 20px; }
-.variants-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2px;
-  margin-top: 60px;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.variant-card {
-  background: #1a1a1a;
-  padding: 0 0 36px;
-  text-align: center;
-  position: relative;
-  border: 1px solid transparent;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.variant-img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  margin-bottom: 32px;
-}
-.variant-body { padding: 0 30px; }
-.variant-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-.variant-badge {
-  position: absolute;
-  top: -16px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--red);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 6px 18px;
-  border-radius: 30px;
-  white-space: nowrap;
-}
-.variant-badge.gold-badge { background: var(--gold); color: #0a0a0a; }
-.variant-icon { font-size: 56px; margin-bottom: 26px; display: block; }
-.variant-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.variant-desc { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.8; margin-bottom: 24px; }
-.variant-features { list-style: none; margin-bottom: 28px; text-align: left; }
-.variant-features li {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex; align-items: center; gap: 8px;
-}
-.variant-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
-.variant-price { font-size: 36px; font-weight: 700; color: var(--gold); margin-bottom: 6px; font-family: 'Playfair Display', serif; }
-.variant-old { font-size: 15px; color: rgba(255,255,255,0.28); text-decoration: line-through; margin-bottom: 26px; }
-.btn-variant {
-  width: 100%;
-  padding: 15px;
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
-  border-radius: 2px;
-  font-family: 'Barlow', sans-serif;
-}
-.btn-variant:hover, .btn-variant.active { background: var(--gold); color: #0a0a0a; }
-
-.steps {
-  display: flex;
-  margin-top: 60px;
-  flex-wrap: wrap;
-  background: #111;
-}
-.step {
-  flex: 1;
-  min-width: 200px;
-  padding: 46px 30px;
-  border-right: 1px solid #222;
-  text-align: center;
-}
-.step:last-child { border-right: none; }
-.step-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 70px;
-  font-weight: 900;
-  color: rgba(201,168,76,0.12);
-  display: block;
-  line-height: 1;
-  margin-bottom: 16px;
-}
-.step h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-.step p { font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.8; }
-
-.guarantee {
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  padding: 60px 30px;
-  text-align: center;
-  margin-top: 60px;
-  border-radius: 4px;
-}
-.guarantee-icon { font-size: 56px; margin-bottom: 22px; display: block; }
-.guarantee h3 { font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 16px; }
-.guarantee p { color: rgba(255,255,255,0.48); max-width: 500px; margin: 0 auto; line-height: 1.8; font-size: 16px; }
-
-.testimonials-bg { background: #070707; padding: 90px 20px; }
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2px;
-  margin-top: 60px;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.testimonial-card {
-  background: #111;
-  padding: 38px 32px;
-  border-left: 3px solid var(--gold);
-}
-.test-stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; margin-bottom: 18px; }
-.test-text { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.9; font-style: italic; margin-bottom: 24px; }
-.test-author { display: flex; align-items: center; gap: 14px; }
-.test-avatar {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  background: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: #0a0a0a; font-size: 16px;
-  flex-shrink: 0;
-}
-.test-name { font-size: 15px; font-weight: 600; }
-.test-loc { font-size: 12px; color: rgba(255,255,255,0.32); margin-top: 2px; }
-
-.cta-final {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a0808 50%, #0a0a0a 100%);
-  padding: 110px 20px;
-  text-align: center;
-}
-.cta-final h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 7vw, 72px);
-  font-weight: 900;
-  margin-bottom: 22px;
-  line-height: 1.1;
-}
-.cta-final h2 span { color: var(--gold); }
-.cta-final p { color: rgba(255,255,255,0.48); font-size: 18px; margin-bottom: 50px; }
-.price-big {
-  font-family: 'Playfair Display', serif;
-  font-size: 60px;
-  font-weight: 900;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 8px;
-}
-.price-note { font-size: 14px; color: rgba(255,255,255,0.32); margin-bottom: 50px; }
-.trust-items {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 36px;
-}
-.trust-item { font-size: 13px; color: rgba(255,255,255,0.28); letter-spacing: 1px; }
-.trust-item span { color: var(--gold); margin-right: 6px; }
-
-footer {
-  background: #050505;
-  border-top: 1px solid #181818;
-  padding: 46px 20px;
-  text-align: center;
-}
-.footer-brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 900;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-footer p { font-size: 12px; color: rgba(255,255,255,0.22); letter-spacing: 1px; line-height: 2; }
-</style>
+</script>
 </head>
 <body>
 
-<div class="hero">
-  <span class="badge-top">★ Producto #1 en Satisfacción Masculina de Argentina</span>
-  <h1>POWER<br><span>PUMP</span><br>MEN 2.0</h1>
-  <p class="hero-sub">Descubrí tu Placer</p>
-  <p class="hero-desc">La bomba de vacío profesional más avanzada del mercado. Diseñada para hombres que quieren más — más confianza, más intensidad, más placer.</p>
-  <div class="stars-hero">★★★★★</div>
-  <p class="stars-label">+2.800 hombres satisfechos en toda Argentina</p>
-  <a class="cta-primary" href="#">QUIERO EL MÍO AHORA</a>
-  <div class="scroll-hint">
-    Scrolleá para descubrir
-    <div class="scroll-line"></div>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<div class="announce">
+  <span>Envío 100% discreto a todo el país</span><span class="sep" aria-hidden="true">·</span><span>Pagá seguro con Mercado Pago</span>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#top" class="logo" aria-label="Power Pump Men 2.0 — inicio">POWER PUMP <span>MEN 2.0</span></a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#producto">Producto</a>
+      <a href="#kits">Kits</a>
+      <a href="#uso">Cómo se usa</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#kits" class="btn btn-dark btn-sm">Comprar</a>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    </div>
   </div>
-</div>
+</header>
 
-<div class="stats-bar">
-  <div class="stat-item"><span class="stat-num">2.800+</span><span class="stat-label">Clientes</span></div>
-  <div class="stat-item"><span class="stat-num">4.9★</span><span class="stat-label">Calificación</span></div>
-  <div class="stat-item"><span class="stat-num">48hs</span><span class="stat-label">Envío Express</span></div>
-  <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Discreción</span></div>
-  <div class="stat-item"><span class="stat-num">30d</span><span class="stat-label">Garantía</span></div>
-</div>
+<main id="main">
 
-<!-- ANDREANI SHIPPING BAR -->
-<div style="background:#111; border-top:1px solid #1e1e1e; border-bottom:1px solid #1e1e1e; padding:18px 20px;">
-  <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap; text-align:center;">
-    <span style="font-size:22px;">🚚</span>
-    <span style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:#fff;">Envío a todo el país vía <span style="color:var(--gold);">Andreani</span></span>
-    <span style="width:1px; height:28px; background:#333; display:inline-block;"></span>
-    <span style="font-size:24px; font-weight:700; color:var(--gold); font-family:'Playfair Display',serif;">$3.999</span>
-    <span style="font-size:13px; color:rgba(255,255,255,0.4); letter-spacing:1px;">— Costo de envío a cargo del comprador</span>
-    <span style="width:1px; height:28px; background:#333; display:inline-block;"></span>
-    <span style="font-size:13px; color:rgba(255,255,255,0.55);">📦 Packaging 100% discreto · Seguimiento en tiempo real</span>
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow"><span class="pulse" aria-hidden="true"></span>Bomba de vacío manual</span>
+      <h1>Power Pump<br><span class="accent">Men 2.0</span></h1>
+      <p class="lead">Tecnología de vacío para mejorar la circulación, la sensibilidad y el rendimiento. Fácil de usar, segura para la piel y con envío 100% discreto.</p>
+      <div class="hero-price">
+        <span class="muted">Kits desde</span>
+        <strong>$24.900</strong>
+      </div>
+      <div class="hero-actions">
+        <a href="#kits" class="btn btn-dark">Elegir mi kit</a>
+        <a href="#producto" class="btn btn-ghost">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></svg>
+          Explorar en 3D
+        </a>
+      </div>
+      <ul class="certs" aria-label="Certificaciones">
+        <li>CE</li><li>RoHS</li><li>Skin Safe</li><li>Libre de BPA</li>
+      </ul>
+    </div>
+
+    <div class="stage hero-stage reveal" data-stage>
+      <div class="v3d" data-kit="pump" data-auto="always" data-animate="true" data-yaw="-0.5"
+           data-fallback="img/kit-power-2.webp" aria-label="Modelo 3D interactivo de la Power Pump Men 2.0">
+        <div class="v3d-loader" aria-hidden="true"></div>
+      </div>
+      <span class="stage-chip">Vista 3D · 360°</span>
+      <span class="stage-hint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+        Arrastrá para girar
+      </span>
+    </div>
   </div>
-</div>
+</section>
 
-<div style="background: #0a0a0a;">
-  <div class="section-wrapper">
-    <span class="section-label">¿Por qué elegirnos?</span>
-    <h2 class="section-title">El poder que<br><span>siempre quisiste</span></h2>
-    <p class="section-desc">Tecnología de vacío de precisión clínica, ahora disponible para uso personal. Sin límites, sin excusas, resultados reales.</p>
-    <div class="divider"></div>
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <div class="benefit-icon">⚡</div>
-        <h3>Resultados desde el Día 1</h3>
-        <p>Efecto visible e inmediato desde la primera sesión. Resultados progresivos y acumulativos con uso constante.</p>
+<!-- ═══ CONFIANZA ═══ -->
+<section class="trust" aria-label="Por qué comprarnos">
+  <div class="container">
+    <div class="trust-grid reveal">
+      <div class="trust-item">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+        <div><strong>Envío discreto</strong><span>Caja neutra, sin logos ni referencias al contenido.</span></div>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">🔒</div>
-        <h3>Sistema de Vacío Pro</h3>
-        <p>Válvula de liberación rápida con control de presión milimétrico. Máxima comodidad y seguridad absoluta.</p>
+      <div class="trust-item">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <div><strong>Pago seguro</strong><span>Con Mercado Pago: tarjeta, débito o dinero en cuenta.</span></div>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">💎</div>
-        <h3>Materiales de Calidad Premium</h3>
-        <p>Cilindro acrílico de alta resistencia, manguera flexible de grado médico, empuñadura ergonómica antideslizante.</p>
+      <div class="trust-item">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6l7-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><strong>Materiales seguros</strong><span>ABS, polipropileno libre de BPA y silicona skin safe.</span></div>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">🎁</div>
-        <h3>Sleeve Large de Regalo</h3>
-        <p>Sleeve de silicona talle large incluido sin costo adicional — valorado en $4.900. Compatible con toda la línea.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">📏</div>
-        <h3>Escala Milimétrica</h3>
-        <p>Medición integrada en el cilindro para seguir tu progreso de forma precisa. Motivación real, resultados medibles.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">📦</div>
-        <h3>Envío 100% Discreto</h3>
-        <p>Packaging neutro sin logos ni indicios del contenido. Tu privacidad es nuestra prioridad. Llega a tu puerta.</p>
+      <div class="trust-item">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg></span>
+        <div><strong>Garantía 30 días</strong><span>Si no quedás conforme, te devolvemos el dinero.</span></div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="variants-bg">
-  <div style="max-width: 1100px; margin: 0 auto;">
-    <span class="section-label">Elegí tu kit</span>
-    <h2 class="section-title">Encontrá la opción<br><span>perfecta para vos</span></h2>
-    <p class="section-desc">Tres kits diseñados para distintos objetivos. Todos incluyen envío discreto y garantía de 30 días.</p>
-    <div class="divider"></div>
-  </div>
-  <div class="variants-grid">
-    <div class="variant-card">
-      <img class="variant-img" src="img/kit-starter.webp" alt="Kit Starter Power Pump Men 2.0">
-      <div class="variant-body">
-        <div class="variant-name">Kit Starter</div>
-        <div class="variant-desc">Ideal para comenzar tu transformación. Kit básico con todo lo esencial.</div>
-        <ul class="variant-features">
-          <li>Bomba Power Pump Men 2.0</li>
-          <li>Sleeve standard incluido</li>
-          <li>Guía de uso rápido</li>
-          <li>Garantía 30 días</li>
-        </ul>
-        <div class="variant-price">$24.900</div>
-        <div class="variant-old">Antes: $31.000</div>
-        <a class="btn-variant" href="https://mpago.li/2tA4oQC" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
-      </div>
+<!-- ═══ PRODUCTO / DESPIECE 3D ═══ -->
+<section class="section" id="producto">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Despiece 3D</span>
+      <h2>Conocé cada componente</h2>
+      <p>Girá el modelo, separá las piezas y mirá las medidas. Tocá un componente para verlo de cerca.</p>
     </div>
-    <div class="variant-card" style="border-color: var(--gold);">
-      <div class="variant-badge gold-badge">★ MÁS VENDIDO</div>
-      <img class="variant-img" src="img/kit-power2.webp" alt="Power Pump Men 2.0 Original">
-      <div class="variant-body">
-        <div class="variant-name">Power 2.0 Original</div>
-        <div class="variant-desc">El kit estrella. La experiencia completa que miles de hombres ya eligieron.</div>
-        <ul class="variant-features">
-          <li>Bomba Power Pump Men 2.0</li>
-          <li>Sleeve LARGE de regalo</li>
-          <li>Guía premium de uso</li>
-          <li>Soporte prioritario</li>
-          <li>Garantía 30 días</li>
-        </ul>
-        <div class="variant-price">$34.900</div>
-        <div class="variant-old">Antes: $45.000</div>
-        <a class="btn-variant active" href="https://mpago.la/131Wowe" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
-      </div>
-    </div>
-    <div class="variant-card">
-      <div class="variant-badge">STOCK LIMITADO</div>
-      <img class="variant-img" src="img/kit-elite.webp" alt="Elite Bundle Power Pump Men 2.0">
-      <div class="variant-body">
-        <div class="variant-name">Elite Bundle</div>
-        <div class="variant-desc">La experiencia máxima. Para quienes no aceptan límites.</div>
-        <ul class="variant-features">
-          <li>Bomba Power Pump Men 2.0</li>
-          <li>3 Sleeves: S / M / L</li>
-          <li>Anillo de erección incluido</li>
-          <li>Lubricante premium</li>
-          <li>Garantía 30 días extendida</li>
-        </ul>
-        <div class="variant-price">$54.900</div>
-        <div class="variant-old">Antes: $72.000</div>
-        <a class="btn-variant" href="https://mpago.la/1MA8KFB" target="_blank" rel="noopener">COMPRAR CON MERCADO PAGO</a>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div style="background: #0a0a0a;">
-  <div class="section-wrapper">
-    <span class="section-label">Modo de uso</span>
-    <h2 class="section-title">Simple, seguro,<br><span>extraordinario</span></h2>
-    <p class="section-desc">Cuatro pasos para una experiencia que va a cambiar tu vida.</p>
-    <div class="divider"></div>
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">01</span>
-        <h3>Preparación</h3>
-        <p>Hidratá la zona y colocá el sleeve de silicona en la base del cilindro para un sellado perfecto y cómodo.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <h3>Activación</h3>
-        <p>Presionás la manija de vacío de forma gradual y controlada. La válvula regula la presión automáticamente.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <h3>Sesión</h3>
-        <p>10 a 20 minutos por sesión. La escala milimétrica te permite medir y registrar tu progreso real.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">04</span>
-        <h3>Resultado</h3>
-        <p>Liberás la válvula y disfrutás resultados inmediatos. Consistencia + tiempo = transformación garantizada.</p>
-      </div>
-    </div>
-    <div class="guarantee">
-      <span class="guarantee-icon">🛡️</span>
-      <h3>Garantía Total de 30 Días</h3>
-      <p>Si por cualquier motivo no quedás 100% satisfecho en los primeros 30 días, te devolvemos tu dinero completamente. Sin preguntas, sin trámites, sin burocracia.</p>
-    </div>
-  </div>
-</div>
+    <div class="anatomy">
+      <ol class="parts reveal" id="parts">
+        <li><button type="button" data-hs="tubo"><span class="n">01</span><span><b>Tubo cilíndrico</b><small>Cámara transparente con escala de medición para controlar la succión.</small></span></button></li>
+        <li><button type="button" data-hs="base"><span class="n">02</span><span><b>Base de silicona</b><small>Sella herméticamente para un vacío seguro y cómodo.</small></span></button></li>
+        <li><button type="button" data-hs="manguera"><span class="n">03</span><span><b>Manguera flexible</b><small>Conecta la bomba al tubo y te da libertad de movimiento.</small></span></button></li>
+        <li><button type="button" data-hs="valvula"><span class="n">04</span><span><b>Válvula de liberación</b><small>Libera el vacío de forma rápida y segura cuando terminás.</small></span></button></li>
+        <li><button type="button" data-hs="bomba"><span class="n">05</span><span><b>Bomba de succión</b><small>Genera el vacío de forma gradual mediante bombeo manual.</small></span></button></li>
+        <li><button type="button" data-hs="asa"><span class="n">06</span><span><b>Asa ergonómica</b><small>Diseñada para un agarre cómodo y un bombeo eficiente.</small></span></button></li>
+      </ol>
 
-<div class="testimonials-bg">
-  <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
-    <span class="section-label">Testimonios reales</span>
-    <h2 class="section-title">Ellos ya lo<br><span>transformaron</span></h2>
-    <p class="section-desc">Hombres reales, resultados reales. Sin filtros, sin actores pagos.</p>
-    <div class="divider"></div>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Dudé mucho antes de comprarlo, pero después de 3 semanas no puedo creer la diferencia. Mi confianza cambió completamente. El envío fue rapidísimo y sin ningún problema de discreción."</p>
-      <div class="test-author">
-        <div class="test-avatar">MG</div>
-        <div>
-          <div class="test-name">Martín G.</div>
-          <div class="test-loc">Buenos Aires · Compra verificada</div>
+      <div class="stage anatomy-stage reveal" id="anatomyStage" data-stage>
+        <div class="v3d" id="anatomyViewer" data-kit="pump" data-auto="always" data-hotspots="true" data-yaw="-0.38"
+             data-fallback="img/despiece.webp" aria-label="Despiece 3D interactivo de la Power Pump Men 2.0">
+          <div class="v3d-loader" aria-hidden="true"></div>
+        </div>
+        <span class="stage-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+          Arrastrá para girar · tocá los números
+        </span>
+        <div class="toolbar" role="toolbar" aria-label="Controles del visor 3D">
+          <button type="button" class="tool" data-action="explode" aria-pressed="false" title="Separar las piezas">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            <span class="t">Despiece</span>
+          </button>
+          <button type="button" class="tool" data-action="dims" aria-pressed="false" title="Mostrar medidas">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4z"/><path d="m7.5 10.5 2-2M10.5 13.5l2-2M13.5 16.5l2-2"/></svg>
+            <span class="t">Medidas</span>
+          </button>
+          <button type="button" class="tool" data-action="spin" aria-pressed="true" title="Rotación automática">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+            <span class="t">Girar</span>
+          </button>
+          <button type="button" class="tool" data-action="reset" title="Volver a la vista inicial">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+            <span class="t">Centrar</span>
+          </button>
         </div>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"La calidad del producto es impresionante. El sleeve de regalo solo ya vale la plata. Resultados desde la primera semana. Muy fácil de usar, ideal si sos principiante. Lo recomiendo 100%."</p>
-      <div class="test-author">
-        <div class="test-avatar">RV</div>
+
+    <div class="specs reveal">
+      <div><strong>22 cm</strong><span>Largo del tubo</span></div>
+      <div><strong>6,9 cm</strong><span>Diámetro de la base</span></div>
+      <div><strong>0 – 20</strong><span>Escala de medición</span></div>
+      <div><strong>ABS · PP</strong><span>Libre de BPA y silicona</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KITS ═══ -->
+<section class="section section-alt" id="kits">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Elegí tu kit</span>
+      <h2>Tres kits, una misma bomba</h2>
+      <p>Todos incluyen la Power Pump Men 2.0 completa y envío discreto. Pasá el mouse o arrastrá cada kit para verlo en 3D.</p>
+    </div>
+
+    <div class="kits">
+      <article class="kit reveal" data-kit="starter">
+        <div class="stage kit-stage" data-stage>
+          <div class="v3d" data-kit="starter" data-auto="hover" data-yaw="-0.42"
+               data-fallback="img/kit-starter-2.webp" aria-label="Kit Starter en 3D">
+            <div class="v3d-loader" aria-hidden="true"></div>
+          </div>
+          <button type="button" class="kit-3d" data-open3d="starter">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Ver en 3D
+          </button>
+          <span class="mini-hint">Arrastrá para girar</span>
+        </div>
+        <div class="kit-body">
+          <div class="kit-top"><h3>Kit Starter</h3><span class="tag">−20%</span></div>
+          <p class="kit-desc">Todo lo esencial para empezar.</p>
+          <ul class="checks">
+            <li>Bomba de vacío manual Power Pump Men 2.0</li>
+            <li>Funda de silicona para sellado</li>
+            <li>Válvula de liberación instantánea</li>
+            <li>Aro de silicona</li>
+            <li>Manual de instrucciones</li>
+          </ul>
+          <div class="kit-price"><strong>$24.900</strong><s>$31.000</s></div>
+          <button type="button" class="btn btn-ghost btn-block" data-buy="starter">Comprar Kit Starter</button>
+        </div>
+      </article>
+
+      <article class="kit kit--featured reveal" data-kit="power">
+        <span class="kit-badge">Más vendido</span>
+        <div class="stage kit-stage" data-stage>
+          <div class="v3d" data-kit="power" data-auto="hover" data-yaw="-0.42"
+               data-fallback="img/kit-power-2.webp" aria-label="Kit Power 2.0 Original en 3D">
+            <div class="v3d-loader" aria-hidden="true"></div>
+          </div>
+          <button type="button" class="kit-3d" data-open3d="power">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Ver en 3D
+          </button>
+          <span class="mini-hint">Arrastrá para girar</span>
+        </div>
+        <div class="kit-body">
+          <div class="kit-top"><h3>Power 2.0 Original</h3><span class="tag">−22%</span></div>
+          <p class="kit-desc">El kit completo, el más elegido.</p>
+          <ul class="checks">
+            <li>Bomba de vacío manual Power Pump Men 2.0</li>
+            <li>Sleeve LARGE de regalo</li>
+            <li>Gel lubricante íntimo neutro</li>
+            <li>Aro de silicona</li>
+            <li>Guía premium de uso</li>
+          </ul>
+          <div class="kit-price"><strong>$34.900</strong><s>$45.000</s></div>
+          <button type="button" class="btn btn-dark btn-block" data-buy="power">Comprar Power 2.0</button>
+        </div>
+      </article>
+
+      <article class="kit reveal" data-kit="elite">
+        <span class="kit-badge kit-badge--light">Stock limitado</span>
+        <div class="stage kit-stage" data-stage>
+          <div class="v3d" data-kit="elite" data-auto="hover" data-yaw="-0.42"
+               data-fallback="img/kit-elite-2.webp" aria-label="Elite Bundle en 3D">
+            <div class="v3d-loader" aria-hidden="true"></div>
+          </div>
+          <button type="button" class="kit-3d" data-open3d="elite">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Ver en 3D
+          </button>
+          <span class="mini-hint">Arrastrá para girar</span>
+        </div>
+        <div class="kit-body">
+          <div class="kit-top"><h3>Elite Bundle</h3><span class="tag">−24%</span></div>
+          <p class="kit-desc">La experiencia más completa.</p>
+          <ul class="checks">
+            <li>Bomba de vacío manual Power Pump Men 2.0</li>
+            <li>3 sleeves: S / M / L</li>
+            <li>Anillo de erección de silicona</li>
+            <li>Gel lubricante premium 50 ml</li>
+            <li>Estuche de presentación</li>
+          </ul>
+          <div class="kit-price"><strong>$54.900</strong><s>$72.000</s></div>
+          <button type="button" class="btn btn-ghost btn-block" data-buy="elite">Comprar Elite Bundle</button>
+        </div>
+      </article>
+    </div>
+
+    <p class="kits-note reveal">Precios en pesos argentinos. El costo de envío se calcula según tu provincia al finalizar la compra.</p>
+  </div>
+</section>
+
+<!-- ═══ CÓMO SE USA ═══ -->
+<section class="section" id="uso">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Modo de uso</span>
+      <h2>Simple, en cuatro pasos</h2>
+      <p>Sin complicaciones: preparás, sellás, bombeás de a poco y liberás cuando terminás.</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step-n">01</span>
+        <h3>Colocá la funda</h3>
+        <p>Ubicá la funda de silicona en la base del tubo para un sellado cómodo.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-n">02</span>
+        <h3>Insertá y sellá</h3>
+        <p>Apoyá el tubo sobre la base hasta que quede bien sellado contra el cuerpo.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-n">03</span>
+        <h3>Bombeá lentamente</h3>
+        <p>Generá el vacío de forma gradual. Sesiones de 10 a 20 minutos.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step-n">04</span>
+        <h3>Liberá la válvula</h3>
+        <p>Girá la válvula para liberar el vacío al instante cuando termines.</p>
+      </li>
+    </ol>
+
+    <div class="usage-notes">
+      <div class="note reveal">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 6.3 6 11a6 6 0 0 1-12 0c0-4.7 6-11 6-11z"/></svg></span>
         <div>
-          <div class="test-name">Rodrigo V.</div>
-          <div class="test-loc">Córdoba · Compra verificada</div>
+          <h3>Comodidad e higiene</h3>
+          <p>Usá lubricante a base de agua para un mejor sellado. Limpiá todas las piezas con agua tibia y jabón neutro antes y después de cada uso, y dejalas secar al aire.</p>
         </div>
       </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Compré el Elite Bundle y fue la mejor inversión del año. La diferencia en mi vida íntima fue total. El packaging discreto fue clave para mí. El equipo de atención al cliente, de primera."</p>
-      <div class="test-author">
-        <div class="test-avatar">JL</div>
+      <div class="note note--care reveal">
+        <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6l7-3z"/><path d="M12 8v5M12 16h.01"/></svg></span>
         <div>
-          <div class="test-name">Julián L.</div>
-          <div class="test-loc">Rosario · Compra verificada</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Al principio tenía mis dudas, pero la garantía de 30 días me animó a probarlo. Para qué decirte, ni la necesité. Resultados reales, producto sólido, empresa seria. Diez puntos."</p>
-      <div class="test-author">
-        <div class="test-avatar">EP</div>
-        <div>
-          <div class="test-name">Esteban P.</div>
-          <div class="test-loc">Mendoza · Compra verificada</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Llevo 2 meses usando el Power 2.0 y los resultados son constantes y reales. La escala graduada es un detalle increíble para ver el progreso. Producto de altísima calidad."</p>
-      <div class="test-author">
-        <div class="test-avatar">FL</div>
-        <div>
-          <div class="test-name">Fernando L.</div>
-          <div class="test-loc">La Plata · Compra verificada</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="test-stars">★★★★★</div>
-      <p class="test-text">"Mi pareja notó la diferencia antes que yo. Eso dice todo. La bomba es robusta, el diseño es profesional y el sistema de vacío funciona perfecto. Vale absolutamente cada peso invertido."</p>
-      <div class="test-author">
-        <div class="test-avatar">NC</div>
-        <div>
-          <div class="test-name">Nicolás C.</div>
-          <div class="test-loc">Tucumán · Compra verificada</div>
+          <h3>Uso responsable</h3>
+          <ul>
+            <li>Empezá con poca presión y aumentala de a poco.</li>
+            <li>No superes los 20 minutos por sesión.</li>
+            <li>Ante dolor, hormigueo o adormecimiento, liberá la válvula y detenete.</li>
+            <li>Si tenés problemas de coagulación o circulación, o tomás anticoagulantes, consultá antes a tu médico.</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="cta-final">
-  <h2>Tu mejor versión<br><span>empieza hoy</span></h2>
-  <p>No esperés más. Miles de hombres en Argentina ya dieron el paso.</p>
-  <span class="price-big">$34.900</span>
-  <p class="price-note">Precio especial por tiempo limitado · Sleeve Large incluido · Envío express 48hs</p>
-  <a class="cta-primary" href="#" style="font-size: 18px; padding: 22px 60px;">🛒 COMPRÁ AHORA CON DESCUENTO</a>
-  <div class="trust-items">
-    <div class="trust-item"><span>✓</span> Garantía 30 días</div>
-    <div class="trust-item"><span>✓</span> Pago 100% seguro</div>
-    <div class="trust-item"><span>✓</span> Envío discreto</div>
-    <div class="trust-item"><span>✓</span> Atención personalizada</div>
+<!-- ═══ OPINIONES ═══ -->
+<!-- Reemplazá estas opiniones por reseñas reales de tus clientes. -->
+<section class="section section-alt" id="opiniones">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Opiniones</span>
+      <h2>Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="reviews">
+      <figure class="review reveal">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <blockquote>“Dudé mucho antes de comprarlo, pero la calidad me sorprendió. El envío fue rapidísimo y llegó en una caja sin nada que indique el contenido.”</blockquote>
+        <figcaption><span class="avatar">MG</span><span><b>Martín G.</b><small>Buenos Aires</small></span></figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <blockquote>“Muy fácil de usar y la válvula de liberación funciona perfecto. El sleeve de regalo es de muy buena calidad. Lo recomiendo.”</blockquote>
+        <figcaption><span class="avatar">RV</span><span><b>Rodrigo V.</b><small>Córdoba</small></span></figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <blockquote>“Compré el Elite Bundle. Producto sólido, buen sellado y la escala del tubo es muy práctica. El packaging discreto fue clave para mí.”</blockquote>
+        <figcaption><span class="avatar">JL</span><span><b>Julián L.</b><small>Rosario</small></span></figcaption>
+      </figure>
+    </div>
   </div>
-</div>
+</section>
 
-<footer>
-  <div class="footer-brand">POWER PUMP MEN 2.0</div>
-  <p>by INFARTA™ · Todos los derechos reservados</p>
-  <p>Envíos a todo Argentina · Atención al cliente: lunes a viernes 9 a 18hs</p>
-  <p style="margin-top: 14px; color: rgba(255,255,255,0.14);">Producto exclusivo para adultos mayores de 18 años</p>
+<!-- ═══ PREGUNTAS ═══ -->
+<section class="section" id="faq">
+  <div class="container faq-wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Todo lo que querés saber</h2>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>¿El envío es realmente discreto?</summary>
+        <p>Sí. El pedido viaja en una caja de cartón neutra, sin logos ni descripción del contenido. En la etiqueta solo figuran tu nombre y tu dirección.</p>
+      </details>
+      <details>
+        <summary>¿Cómo pago?</summary>
+        <p>Completás tus datos de envío y pagás con Mercado Pago: tarjeta de crédito, débito o dinero en cuenta. Recibís la confirmación por email.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto sale el envío y cuánto tarda?</summary>
+        <p>Enviamos a todo el país por Andreani / Correo Argentino. El costo depende de tu provincia y lo ves antes de pagar, en el checkout.</p>
+      </details>
+      <details>
+        <summary>¿Qué kit me conviene?</summary>
+        <p>Si es tu primera bomba, el Kit Starter tiene todo lo esencial. El Power 2.0 Original suma el sleeve Large y gel lubricante, y el Elite Bundle incluye los tres talles de sleeve (S, M y L), anillo, gel premium y estuche.</p>
+      </details>
+      <details>
+        <summary>¿Qué medidas tiene?</summary>
+        <p>El tubo mide aproximadamente 22 cm de largo y la base 6,9 cm de diámetro. Tiene una escala impresa de 0 a 20 para que puedas seguir cada sesión.</p>
+      </details>
+      <details>
+        <summary>¿Cómo se limpia?</summary>
+        <p>Desarmá las piezas y lavalas con agua tibia y jabón neutro. Dejalas secar al aire antes de guardarlas. Evitá alcohol y solventes sobre el tubo para que no pierda transparencia.</p>
+      </details>
+      <details>
+        <summary>¿Tiene garantía?</summary>
+        <p>Sí. Si no quedás conforme dentro de los primeros 30 días, te devolvemos el dinero.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL ═══ -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-panel reveal">
+      <div>
+        <span class="eyebrow eyebrow--dark">Power Pump Men 2.0</span>
+        <h2>Tu mejor versión empieza hoy.</h2>
+        <p>Elegí tu kit y recibilo en tu casa, con total discreción.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#kits" class="btn btn-light">Elegir mi kit</a>
+        <span class="cta-from">Desde <strong>$24.900</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#top" class="logo">POWER PUMP <span>MEN 2.0</span></a>
+      <p class="muted">by <strong>Descubrí Tu Placer</strong></p>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a href="#producto">Producto</a>
+      <a href="#kits">Kits</a>
+      <a href="#uso">Cómo se usa</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <div class="footer-info">
+      <p>Envíos a todo Argentina</p>
+      <p>Atención: lunes a viernes de 9 a 18 h</p>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>Producto exclusivo para mayores de 18 años. No reemplaza la consulta ni el tratamiento médico.</p>
+    <p>© <span id="year">2026</span> Power Pump Men 2.0 · Descubrí Tu Placer</p>
+  </div>
 </footer>
 
+<!-- ═══ MODAL 3D ═══ -->
+<dialog class="modal" id="viewerModal" aria-labelledby="modalTitle">
+  <div class="modal-inner">
+    <div class="stage modal-stage" data-stage>
+      <div class="v3d" id="modalViewer" aria-label="Vista 3D del kit"></div>
+      <span class="stage-hint">Arrastrá para girar · rueda o pellizcá para hacer zoom</span>
+    </div>
+    <aside class="modal-info">
+      <button type="button" class="modal-close" aria-label="Cerrar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="eyebrow">Vista 3D</span>
+      <h3 id="modalTitle">Kit</h3>
+      <p class="kit-desc" id="modalDesc"></p>
+      <ul class="checks" id="modalIncludes"></ul>
+      <div class="kit-price" id="modalPrice"></div>
+      <button type="button" class="btn btn-dark btn-block" id="modalBuy" data-buy="power">Comprar</button>
+      <p class="fine">Envío discreto · Pago seguro con Mercado Pago</p>
+    </aside>
+  </div>
+</dialog>
+
+<script src="js/pump3d.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
