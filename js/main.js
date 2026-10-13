@@ -8,8 +8,8 @@
      whatsapp: número con código de país, sin "+" ni espacios
                (ej. '5491112345678'). Si queda vacío no se muestra
                el botón flotante de WhatsApp.
-     Los links de Mercado Pago y el email de pedidos se configuran
-     en checkout.html.
+     Los pagos los procesa el servidor de Railway (server/pagos.ts):
+     ahí se configuran el token de Mercado Pago y el email de pedidos.
      ────────────────────────────────────────────────────────────── */
   var CONFIG = {
     whatsapp: '',

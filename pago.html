@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Estado del pago — Power Pump Men 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .result { min-height: calc(100vh - var(--header-h)); display: grid; place-items: center; padding: 48px 16px; }
+  .result-card {
+    width: 100%; max-width: 520px; text-align: center;
+    background: var(--surface); border: 1px solid var(--line-2); border-radius: 28px;
+    padding: 40px 32px; box-shadow: var(--shadow);
+  }
+  .result-ico {
+    width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 20px;
+    display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink);
+  }
+  .result-ico .ring { width: 30px; height: 30px; border-radius: 50%; border: 3px solid rgba(6, 103, 156, .2); border-top-color: var(--accent-ink); animation: spin .8s linear infinite; }
+  .is-ok .result-ico { background: #E6F6EC; color: #11733F; }
+  .is-wait .result-ico { background: #FFF4E0; color: #A15C00; }
+  .is-fail .result-ico { background: #FDECEC; color: #8E1B1B; }
+  .result-card h1 { font-size: clamp(26px, 5vw, 32px); font-weight: 800; }
+  .result-card p { color: var(--muted); margin-top: 12px; }
+  .result-data { display: grid; gap: 0; margin: 26px 0 0; text-align: left; border-top: 1px solid var(--line-2); }
+  .result-data div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 2px; border-bottom: 1px solid var(--line-2); font-size: 15px; }
+  .result-data div[hidden] { display: none; }
+  .result-data dt { color: var(--muted); }
+  .result-data dd { margin: 0; font-weight: 600; text-align: right; }
+  .result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+  .result-note { font-size: 13px; margin-top: 18px !important; }
+</style>
+</head>
+<body>
+
+<header class="header is-scrolled">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Power Pump Men 2.0 — inicio">POWER PUMP <span>MEN 2.0</span></a>
+    <a href="index.html" class="btn btn-ghost btn-sm">Volver a la tienda</a>
+  </div>
+</header>
+
+<main class="result">
+  <div class="result-card" id="card" role="status" aria-live="polite">
+    <div class="result-ico" id="ico"><span class="ring" aria-hidden="true"></span></div>
+    <h1 id="title">Verificando tu pago…</h1>
+    <p id="text">Estamos confirmando el estado con Mercado Pago.</p>
+    <dl class="result-data" id="data" hidden>
+      <div><dt>Pedido</dt><dd id="d-ref">—</dd></div>
+      <div id="row-kit" hidden><dt>Producto</dt><dd id="d-kit">—</dd></div>
+      <div id="row-total" hidden><dt>Total</dt><dd id="d-total">—</dd></div>
+    </dl>
+    <div class="result-actions" id="actions"></div>
+    <p class="result-note muted" id="note" hidden></p>
+  </div>
+</main>
+
+<script>
+(function () {
+  /* Mismo servidor de pagos que checkout.html */
+  var API = 'https://pagos-production-3dca.up.railway.app';
+
+  var ICONS = {
+    ok: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    wait: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    fail: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>'
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function fmt(n) { return '$' + Number(n).toLocaleString('es-AR', { maximumFractionDigits: 2 }); }
+
+  var q = new URLSearchParams(location.search);
+  var paymentId = q.get('payment_id') || q.get('collection_id') || '';
+  var ref = q.get('external_reference') || '';
+  var urlStatus = q.get('collection_status') || q.get('status') || '';
+  if (paymentId === 'null') paymentId = '';
+
+  function button(href, label, dark) {
+    return '<a class="btn ' + (dark ? 'btn-dark' : 'btn-ghost') + ' btn-block" href="' + href + '">' + label + '</a>';
+  }
+
+  function render(state, info, verified) {
+    var card = $('card');
+    card.className = 'result-card is-' + state;
+    $('ico').innerHTML = ICONS[state];
+    var kit = info.kit || 'power';
+
+    if (state === 'ok') {
+      $('title').textContent = '¡Pago aprobado!';
+      $('text').textContent = 'Gracias por tu compra. Te enviamos la confirmación por email y despachamos tu pedido en un embalaje 100% discreto.';
+      $('actions').innerHTML = button('index.html', 'Volver a la tienda', true);
+    } else if (state === 'wait') {
+      $('title').textContent = 'Pago pendiente';
+      $('text').textContent = info.payment_type === 'ticket'
+        ? 'Cuando pagues en Rapipago o Pago Fácil, Mercado Pago nos avisa y despachamos tu pedido. Te llega un email cuando se acredite.'
+        : 'Mercado Pago está procesando el pago. Te avisamos por email apenas se apruebe; no hace falta que pagues de nuevo.';
+      $('actions').innerHTML = button('index.html', 'Volver a la tienda', true);
+    } else {
+      $('title').textContent = 'El pago no se completó';
+      $('text').textContent = 'No se realizó ningún cobro. Podés intentarlo de nuevo, con el mismo u otro medio de pago.';
+      $('actions').innerHTML = button('checkout.html?kit=' + encodeURIComponent(kit), 'Intentar de nuevo', true) + button('index.html', 'Volver a la tienda', false);
+    }
+
+    if (ref) {
+      $('data').hidden = false;
+      $('d-ref').textContent = ref;
+      if (info.kit_name) { $('row-kit').hidden = false; $('d-kit').textContent = info.kit_name; }
+      if (info.total) { $('row-total').hidden = false; $('d-total').textContent = fmt(info.total); }
+    }
+    if (!verified && state !== 'fail') {
+      $('note').hidden = false;
+      $('note').textContent = 'Todavía no pudimos confirmarlo con Mercado Pago. Si el pago se aprobó, te llega el email de confirmación en unos minutos.';
+    }
+  }
+
+  function stateOf(status) {
+    if (status === 'approved') return 'ok';
+    if (status === 'pending' || status === 'in_process' || status === 'authorized' || status === 'in_mediation') return 'wait';
+    return 'fail';
+  }
+
+  /* Sin verificación del servidor nunca se muestra "aprobado": como mucho "pendiente". */
+  function unverified(status) { var s = stateOf(status); return s === 'ok' ? 'wait' : s; }
+
+  if (!paymentId || !ref) {
+    render(unverified(urlStatus), {}, false);
+    return;
+  }
+
+  fetch(API + '/api/payment-status?payment_id=' + encodeURIComponent(paymentId) + '&ref=' + encodeURIComponent(ref))
+    .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'error'); return j; }); })
+    .then(function (info) { render(stateOf(info.status), info, true); })
+    .catch(function () { render(unverified(urlStatus), {}, false); });
+})();
+</script>
+</body>
+</html>
