@@ -1,0 +1,4 @@
+# La carpeta del servidor de pagos no se publica
+/server/* / 302
+/server / 302
+/.gitignore / 302
